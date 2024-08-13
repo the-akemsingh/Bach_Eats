@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import { calistoga } from "./fonts";
+import Navbar from "@/components/Navbar";
 
 
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={calistoga.className}>
         <Providers>
+            <Navbar/>
             {children}
         </Providers>
       </body>

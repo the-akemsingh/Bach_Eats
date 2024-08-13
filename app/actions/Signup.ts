@@ -1,6 +1,7 @@
 "use server"
 import prisma from "@/PrismaClient";
 import { UserSignup } from "../ZodSchemas/Signup";
+import bcrypt from "bcrypt";
 
 export async function signup({
   name,
@@ -45,8 +46,9 @@ export async function signup({
     }
 
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
-      data: { name, email, password, phonenumber },
+      data: { name, email, password:hashedPassword, phonenumber },
     });
     return {
       message: "User Signed up successfully",

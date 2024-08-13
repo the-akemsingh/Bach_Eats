@@ -2,7 +2,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import "dotenv/config";
 import prisma from "@/PrismaClient";
-
+import bcrypt from "bcrypt";
 
 export const authOptions = {
   providers: [
@@ -17,17 +17,20 @@ export const authOptions = {
         password: { label: "password", type: "password", placeholder: "" },
       },
       async authorize(credentials: any) : Promise<any> {
+
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
-            password:credentials.password
           },
         });
         if(!user){
-          return{
-            message:"Invalid Credentials",
-          }
+          throw new Error("User not found");
         }
+        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+        if (!isPasswordValid) {
+          throw new Error("Password is incorrect");
+        }
+
         return {
           id: user?.id,
           email: user?.email,

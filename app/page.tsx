@@ -1,78 +1,25 @@
 "use client";
-import { signIn, signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { merriweather } from "./fonts";
-
+import Image from "next/image";
 export default function Home() {
   const session = useSession();
   const Router = useRouter();
 
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="text-5xl text-center">
-        Don't feel like cooking today? <br />
-        Grocery is over? <br />
-        or wanna meet new people?
-      </div>
-      <div className="text-3xl flex flex-col text-center">
-        <span>
-          Join people nearby over a meal and
-        </span>
-        <span>
-          return with new experiences and Fellas
-        </span>
-      </div>
-      <div className={`${merriweather.className} font-semibold flex flex-col items-center text-center`}>
-        <span>Here you can find people in your locality that have extra supper or</span>
-        <span>THEY ARE AS LONELY AS YOU 👀</span>
+    <div className=" mt-20 grid grid-cols-2  min-h-96 ">
+      <div className="flex flex-col ">
+        <div className=" mt-36 ml-28 flex flex-col text-5xl pt-5 pl-5 pb-5  ">
+          Don't feel like cooking today ? <br />
+          or Feeling Lonely ?<br />
+          <div className="text-xl mt-5 flex gap-3">
+            Find out bachelor's nearby and share meal with them. <div className=" h-7 w-7"><Image src={'/images/teaicon.svg'} height={25} width={25} alt="Tea Cup" ></Image></div>
+          </div>
+        </div>
       </div>
       <div>
-        {!session.data?.user && <div>
-          <button onClick={
-            () => {
-              Router.push('/signup')
-            }
-          } >
-            Signup
-          </button>
-        </div>}
-        {!session.data?.user && <div>
-          <button onClick={
-            () => {
-              signIn()
-            }
-          } >
-            SignIn
-          </button>
-        </div>}
-        {session.data?.user && <div>
-          <button onClick={
-            () => {
-              Router.push('/invitations/all')
-            }
-          } >
-            Find Invitations
-          </button>
-        </div>}
-        {session.data?.user && <div>
-          <button onClick={
-            () => {
-              Router.push('/invitations/new')
-            }
-          } >
-            CreateInvite
-          </button>
-        </div>}
-        {session.data?.user && <div>
-          <button onClick={
-            () => {
-              signOut();
-            }
-          } >
-            SignOut
-          </button>
-        </div>}
+        
       </div>
     </div>
   );

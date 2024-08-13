@@ -27,7 +27,6 @@ model Invite {
   heading     String
   meal        String
   note        String
-  slots       String
   timeCreated DateTime @default(now())
   author      User     @relation(fields: [authorId], references: [id])
   authorId    String
