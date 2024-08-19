@@ -1,7 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { merriweather } from "./fonts";
 import Image from "next/image";
 export default function Home() {
   const session = useSession();
@@ -10,7 +9,7 @@ export default function Home() {
   return (
     <div className=" mt-20 grid grid-cols-2  min-h-96 ">
       <div className="flex flex-col ">
-        <div className=" mt-36 ml-28 flex flex-col text-5xl pt-5 pl-5 pb-5  ">
+        <div className=" mt-36 ml-28 flex flex-col text-5xl pt-5 pl-5 pb-5 ">
           Don't feel like cooking today ? <br />
           or Feeling Lonely ?<br />
           <div className="text-xl mt-5 flex gap-3">

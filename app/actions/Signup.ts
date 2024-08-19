@@ -3,16 +3,19 @@ import prisma from "@/PrismaClient";
 import { UserSignup } from "../ZodSchemas/Signup";
 import bcrypt from "bcrypt";
 
+
 export async function signup({
   name,
   email,
   password,
   phonenumber,
+  gender
 }: {
   name: string;
   email: string;
   password: string;
   phonenumber: string;
+  gender: any;
 }) {
     const body = { name, email, phonenumber, password };
     const isValid = UserSignup.safeParse(body);
@@ -48,7 +51,7 @@ export async function signup({
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
-      data: { name, email, password:hashedPassword, phonenumber },
+      data: { name, email, password:hashedPassword, phonenumber,gender },
     });
     return {
       message: "User Signed up successfully",

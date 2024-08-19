@@ -4,7 +4,6 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input, PasswordInput } from "@/components/Input";
-import BirdPotAnimation from "@/components/Bird-pot-animation";
 
 const Signin = () => {
     const [email, setEmail] = useState("");
@@ -13,21 +12,16 @@ const Signin = () => {
 
     return (
         <div style={{
-            backgroundImage: "url('/images/ManCracker.svg')",
-            backgroundSize: "30%",
-            backgroundPosition: "left bottom",
-            paddingLeft: "",
-            paddingRight: "",
-            backgroundPositionX: "-10%",
-            paddingBottom: "",
-            backgroundRepeat: "no-repeat",
-        }} className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col justify-center items-center pt-3 text-black"
-            >
+            backgroundImage: "url('/images/red flower centre.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat'
+        }} className="">
+            <div className="flex flex-col justify-center items-center pt-3 text-black" >
                 <div className="pt-4 pb-4 pl-8 pr-8 border rounded-lg shadow-lg bg-cover bg-center">
                     <div className="text-center w-72">
                         <div className="text-5xl font-bold">Signin</div>
-                        <span>Don't have an account? <button className="underline text-xl" onClick={() => Router.push('/signup')}>Signup</button></span>
+                        <span>Don't have an account? <button className="underline text-xl" onClick={() => Router.push('/signup')}>signup</button></span>
                     </div>
                     <div className="flex flex-col w-72 items-center gap-3 mt-8">
                         <Input value="Email" onChange={(e) => setEmail(e.target.value)} />
@@ -75,9 +69,6 @@ const Signin = () => {
                         </button>
                     </div>
                 </div>
-            </div>
-            <div className="flex items-center justify-center">
-                <BirdPotAnimation />
             </div>
         </div>
     );

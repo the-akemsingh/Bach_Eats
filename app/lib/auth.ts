@@ -16,24 +16,27 @@ export const authOptions = {
         email: { label: "email", type: "text", placeholder: "" },
         password: { label: "password", type: "password", placeholder: "" },
       },
-      async authorize(credentials: any) : Promise<any> {
-
+      async authorize(credentials: any): Promise<any> {
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
           },
         });
-        if(!user){
+        if (!user) {
           throw new Error("User not found");
         }
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+        const isPasswordValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
         if (!isPasswordValid) {
           throw new Error("Password is incorrect");
         }
 
         return {
-          id: user?.id,
-          email: user?.email,
+          id: user.id,
+          email: user.email,
+          name: user.name,
         };
       },
     }),
@@ -43,8 +46,9 @@ export const authOptions = {
     signIn: "/signin",
   },
   callbacks: {
-    async session({ session, token }: any) {
+    async session({ session, token, user }: any) {
       session.user.id = token.sub;
+      session.user.gender=user.gender
       return session;
     },
   },

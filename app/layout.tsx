@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
-import { calistoga } from "./fonts";
-import Navbar from "@/components/Navbar";
+import { calistoga, merriweather, poppins } from "./fonts";
+import NavbarProvider from "./NavbarProvider";
 
 
 
@@ -18,10 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={calistoga.className}>
+      <body 
+      // className={`${calistoga.classname} ${merriweather.classname} ${poppins.classname} `}
+      >
         <Providers>
-            <Navbar/>
-            {children}
+          <NavbarProvider />
+          {children}
         </Providers>
       </body>
     </html>
