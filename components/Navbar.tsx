@@ -1,14 +1,15 @@
 "use client";
 import Link from 'next/link';
-import {  merriweather } from '../app/fonts';
+// import {  merriweather } from '../app/fonts';
 import { signOut, useSession } from 'next-auth/react';
+import { merriweather } from '@/app/fonts';
 
 function Navbar() {
     const session = useSession();
 
     return (
         <div
-            className={` flex justify-center gap-6 font-bold pt-7 pb-5  `}
+            className={` flex justify-center gap-6 font-bold pt-7 pb-5 ${merriweather.className} `}
         >
             <Link href="/" className='transition-transform transform hover:scale-105  hover:text-gray-400'>
                 Home

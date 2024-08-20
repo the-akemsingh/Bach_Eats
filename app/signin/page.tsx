@@ -11,24 +11,28 @@ const Signin = () => {
     const Router = useRouter();
 
     return (
-        <div style={{
-            backgroundImage: "url('/images/red flower centre.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat'
-        }} className="">
-            <div className="flex flex-col justify-center items-center pt-3 text-black" >
-                <div className="pt-4 pb-4 pl-8 pr-8 border rounded-lg shadow-lg bg-cover bg-center">
-                    <div className="text-center w-72">
+        <div className="grid grid-cols-2 h-screen">
+            <div
+                style={{
+                    backgroundImage: "url('/images/red flower centre.jpg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center center",
+                    backgroundRepeat: "no-repeat",
+                }}
+                className="col-span-1"
+            ></div>
+
+            <div className="flex justify-center items-center bg-gray-100 col-span-1">
+                <div className="pt-4 pb-4 pl-8 pr-8">
+                    <div className="flex flex-col gap-2 min-w-80">
                         <div className="text-5xl font-bold">Signin</div>
-                        <span>Don't have an account? <button className="underline text-xl" onClick={() => Router.push('/signup')}>signup</button></span>
                     </div>
-                    <div className="flex flex-col w-72 items-center gap-3 mt-8">
-                        <Input value="Email" onChange={(e) => setEmail(e.target.value)} />
-                        <PasswordInput value="Password" onChange={(e) => setPassword(e.target.value)}></PasswordInput>
+                    <div className="flex flex-col items-center gap-3 mt-8">
+                        <Input placeholder="Bachelors@gmail.com" value="Email" onChange={(e) => setEmail(e.target.value)} />
+                        <PasswordInput value="Password" onChange={(e) => setPassword(e.target.value)} />
 
                         <button
-                            className="w-full bg-slate-400 p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl"
+                            className="w-full mt-2 bg-white p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl"
                             onClick={async () => {
                                 const user = await signIn("credentials", {
                                     email,
@@ -46,9 +50,8 @@ const Signin = () => {
                             Signin
                         </button>
 
-
                         <button
-                            className="w-full flex items-center justify-center gap-2 p-2 bg-black text-white rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl "
+                            className="w-full flex items-center justify-center gap-2 p-2 bg-red-950 text-white rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl"
                             onClick={() => signIn("google")}
                         >
                             <svg
@@ -67,6 +70,17 @@ const Signin = () => {
                             </svg>
                             <span>Sign in with Google</span>
                         </button>
+
+                        <hr className="border-black w-full mt-2 mb-2" />
+                        <span>
+                            Don't have an account?{" "}
+                            <button
+                                className="text-blue-500"
+                                onClick={() => Router.push("/signup")}
+                            >
+                                Signup
+                            </button>
+                        </span>
                     </div>
                 </div>
             </div>
