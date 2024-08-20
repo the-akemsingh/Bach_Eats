@@ -4,6 +4,8 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input, PasswordInput } from "@/components/Input";
+import Link from "next/link";
+import { jersey_10 } from "../fonts";
 
 const Signin = () => {
     const [email, setEmail] = useState("");
@@ -20,7 +22,11 @@ const Signin = () => {
                     backgroundRepeat: "no-repeat",
                 }}
                 className="col-span-1"
-            ></div>
+            >
+                <Link href={'/'} className={`absolute  left-32 ml-2 top-4 text-6xl text-white ${jersey_10.className}`} style={{ zIndex: 10 }}>
+                    BE
+                </Link>
+            </div>
 
             <div className="flex justify-center items-center bg-gray-100 col-span-1">
                 <div className="pt-4 pb-4 pl-8 pr-8">

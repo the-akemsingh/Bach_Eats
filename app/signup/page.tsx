@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {  Input, PasswordInput } from "@/components/Input";
+import { Input, PasswordInput } from "@/components/Input";
 import { signup } from "../actions/Signup";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { jersey_10 } from "../fonts";
 
 const Signup = () => {
     const [email, setEmail] = useState("");
@@ -24,7 +26,11 @@ const Signup = () => {
                     backgroundRepeat: "no-repeat",
                 }}
                 className="col-span-1"
-            ></div>
+            >
+                <Link href={'/'} className={`absolute  left-32 ml-2 top-4 text-6xl text-white ${jersey_10.className}`} style={{ zIndex: 10 }}>
+                    BE
+                </Link>
+            </div>
 
             <div className="flex justify-center items-center bg-gray-100 col-span-1">
                 <div className="pt-4 pb-4 pl-8 pr-8  ">
@@ -42,7 +48,7 @@ const Signup = () => {
                             onChange={(e) => setGender(e.target.value)}
                         >
                             <option value="" disabled>
-                                Select Gender
+                                Gender
                             </option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
