@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input, PasswordInput } from "@/components/Input";
 import Link from "next/link";
-import { jersey_10 } from "../fonts";
+import { jersey_10 } from "@/app/fonts";
 
 const Signin = () => {
     const [email, setEmail] = useState("");

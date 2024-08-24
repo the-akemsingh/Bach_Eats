@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input, PasswordInput } from "@/components/Input";
-import { signup } from "../actions/Signup";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { jersey_10 } from "../fonts";
+import { jersey_10 } from "@/app/fonts";
+import { signup } from "@/app/actions/Signup";
 
 const Signup = () => {
     const [email, setEmail] = useState("");
