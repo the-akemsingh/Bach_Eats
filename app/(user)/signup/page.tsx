@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Input, PasswordInput } from "@/components/Input";
+import { Input, PasswordInput } from "@/components/ui/input";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { jersey_10 } from "@/app/fonts";

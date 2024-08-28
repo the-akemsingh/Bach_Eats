@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/PrismaClient";
-import { UserSignup } from "../ZodSchemas/Signup";
+import { UserSignup } from "../../ZodSchemas/Signup";
 import bcrypt from "bcrypt";
 import { SendMail } from "./SendMail";
 

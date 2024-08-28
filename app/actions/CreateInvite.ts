@@ -1,8 +1,8 @@
 "use server";
 import prisma from "@/PrismaClient";
-import { CreateInvite } from "../ZodSchemas/CreateInvite";
+import { CreateInvite } from "../../ZodSchemas/CreateInvite";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../lib/auth";
+import { authOptions } from "../../lib/auth";
 
 export async function CreateNewInvite({
   heading,
