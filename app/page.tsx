@@ -1,22 +1,20 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { calistoga, jersey_10, merriweather, pacifico } from "./fonts";
+import { calistoga, jersey_10, pacifico } from "./fonts";
 import Link from "next/link";
-import { AppleCardsCarouselDemo } from "@/components/ui/activities";
+import { AppleCardsCarousel } from "@/components/ui/activities";
 import { FlipWords } from "@/components/ui/flip-words";
+import { Lamp } from "@/components/ui/lamp";
+import { ShowInvites } from "@/components/ui/show-invites";
 
 
 export default function Home() {
   const session = useSession();
-  const Router = useRouter();
 
   return (
     <div className="overflow-hidden">
-         <Link href={'/'} className={` absolute ml-32 mt-4 text-6xl  ${jersey_10.className}`} >
-        BE
-      </Link>
+         
 
 
       <div className="  top-10 left-4 flex flex-col">
@@ -41,11 +39,11 @@ export default function Home() {
         </div>
         }
       </div>
-
-
-      <AppleCardsCarouselDemo></AppleCardsCarouselDemo>
-
-
+      <AppleCardsCarousel></AppleCardsCarousel>
+      <Lamp></Lamp>
+      <div className="m-5">
+      <ShowInvites></ShowInvites>
+      </div>
     </div>
   );
 }

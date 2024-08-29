@@ -46,9 +46,8 @@ export const authOptions = {
     signIn: "/signin",
   },
   callbacks: {
-    async session({ session, token, user }: any) {
+    async session({ session, token }: any) {
       session.user.id = token.sub;
-      session.user.gender=user.gender
       return session;
     },
   },

@@ -6,16 +6,18 @@ import { authOptions } from "../../lib/auth";
 
 export async function CreateNewInvite({
   heading,
-  meal,
+  pitch,
   note,
+  slots,
 }: {
   heading: string;
-  meal: string;
-  note: string;
+  pitch: string;
+  note: string | null ;
+  slots: string;
 }) {
   const session = await getServerSession(authOptions);
 
-  const body = { heading, meal, note };
+  const body = { heading, pitch, note, slots };
   const isValid = CreateInvite.safeParse(body);
   if (!isValid.success) {
     console.log(isValid.error);
@@ -29,15 +31,16 @@ export async function CreateNewInvite({
       message: "Please Login or signup",
     };
   }
-  const authorId = session?.user?.id;
-  console.log(authorId);
+  const hostId = session?.user?.id;
+  console.log(hostId);
   try {
     const post = await prisma.invite.create({
       data: {
         heading,
-        meal,
+        pitch,
+        hostId,
         note,
-        authorId,
+        slots,
       },
     });
     return {
@@ -51,4 +54,3 @@ export async function CreateNewInvite({
     };
   }
 }
-
