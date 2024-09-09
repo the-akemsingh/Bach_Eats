@@ -1,17 +1,39 @@
 "use server"
 
 import prisma from "@/PrismaClient"
-export async function all_Invites() {
+export async function allValid_Invites() {
     try{
-        const invites= await prisma.invite.findMany();
-        if(!invites){
+        const threeHoursAgo = new Date(Date.now() - 3 * 60 * 60 * 1000); 
+
+        const activeInvites = await prisma.invite.findMany({
+            // where: {
+            //   timeCreated: {
+            //     gte: threeHoursAgo, 
+            //   },
+            // },
+            select: {
+              id: true,
+              heading: true,
+              pitch: true,
+              note: true,
+              slots: true,
+              host: {
+                select: {
+                  id: true,
+                },
+              },
+            },
+          });
+        if(!activeInvites){
             return{
                 message:"No invites available",
                 status:204
             }
         }
-
-        return {invites,status:501}
+        return {
+            activeInvites,
+            status:201
+        }
     }
     catch(e){
         return{
@@ -20,3 +42,5 @@ export async function all_Invites() {
         }
     }
 }
+
+

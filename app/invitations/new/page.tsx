@@ -42,7 +42,7 @@ export default function NewInvite() {
                     <Input value="Note" placeholder="Something that one should be aware of" onChange={(e) => setNote(e.target.value)}>
                     </Input>
 
-                    <Input value="Heading" placeholder="How many people do you expect?" onChange={(e) => setSlots(e.target.value)}>
+                    <Input value="Slots" placeholder="How many people do you expect?" onChange={(e) => setSlots(e.target.value)}>
                     </Input>
 
                     <button

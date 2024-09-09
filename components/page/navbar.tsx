@@ -12,6 +12,7 @@ function Navbar() {
 
         <div
             className={`absolute top-0 left-0 w-full flex   justify-center gap-6 font-extrabold pt-7 pb-5 ${poppins.className}`}
+            // style={{zIndex:10}}
             >
             {session?.data?.user && <>
                 

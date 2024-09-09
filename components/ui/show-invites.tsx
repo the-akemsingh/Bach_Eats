@@ -229,6 +229,7 @@ const cards = [
           Del Rey has established herself as a unique and influential figure in
           the music industry, earning a dedicated fan base and numerous
           accolades.
+          lorem300
         </p>
       );
     },
