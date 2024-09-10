@@ -42,8 +42,8 @@ model Invite {
 model ReceivedInviteReq {
   id        String @id @default(cuid())
   inviteId  String
-  invite    Invite @relation(fields: [inviteId], references: [id])
   fromId    String
+  invite    Invite @relation(fields: [inviteId], references: [id])
   Requestor User   @relation(fields: [fromId], references: [id])
 }
 

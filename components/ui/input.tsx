@@ -14,7 +14,7 @@ const Input = ({ value, placeholder, onChange }: {
                 onChange={(e) => onChange(e)}
                 className="text-sm custom-input w-full px-4 py-2 border text-black border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:outline-blue-300 hover:shadow-lg hover:border-yellow-700 bg-gray-100"
                 placeholder={placeholder}
-                type="text"
+                type="zz"
                 id=""
             />
         </div>

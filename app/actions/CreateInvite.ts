@@ -51,6 +51,7 @@ export async function CreateNewInvite({
     console.log(e);
     return {
       message: "Error occured while posting",
+      status:500
     };
   }
 }
