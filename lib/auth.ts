@@ -1,15 +1,15 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
+// import GoogleProvider from "next-auth/providers/google";
 import "dotenv/config";
 import prisma from "@/PrismaClient";
 import bcrypt from "bcrypt";
 
 export const authOptions = {
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID || "",
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    // }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {

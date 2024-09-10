@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
 
-      <BackgroundBeamsWithCollision >
+      {/* <BackgroundBeamsWithCollision > */}
         
       <div className=" mb-14 mt-14 bg-transparent top-10  flex flex-col">
         <div className={`
@@ -45,7 +45,7 @@ export default function Home() {
         }
 
       </div> 
-      </BackgroundBeamsWithCollision>
+      {/* </BackgroundBeamsWithCollision> */}
       <ActivitiesCard></ActivitiesCard>
       <Lamp></Lamp>
 

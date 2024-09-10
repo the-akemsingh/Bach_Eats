@@ -1,10 +1,10 @@
 "use client";
 
 import { FaUser } from "react-icons/fa";
-import { allValid_Invites } from "@/app/actions/getAll-Invites";
 import { calistoga, pacifico, poppins } from "@/app/fonts";
 import { useEffect, useRef, useState } from "react";
 import sendInviteReq from "@/app/actions/sendInviteReq";
+import { useSession } from "next-auth/react";
 
 interface InvitePopupProps {
     invite: Invite;
@@ -32,6 +32,10 @@ const sendInviteHandler = async (selectedInviteId: string, guestId: string) => {
 
 
 export default function InvitePopup({ invite, onClose }: InvitePopupProps) {
+    const session=useSession();
+    const user=session.data?.user 
+    
+   
     const popupRef = useRef<HTMLDivElement | null>(null);
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -61,7 +65,7 @@ export default function InvitePopup({ invite, onClose }: InvitePopupProps) {
                 ref={popupRef}
                 className="bg-white p-6 rounded-xl shadow-lg min-h-96 relative transition-transform duration-300 ease-in-out transform scale-95 z-50"
                 style={{ width: 700 }}
-            >
+            >                
                 <h2 className={`text-3xl ${calistoga.className} mb-4 border-b-2 border-gray-300 pb-2`}>
                     {invite.heading}
                 </h2>
@@ -77,7 +81,7 @@ export default function InvitePopup({ invite, onClose }: InvitePopupProps) {
                 <p className="text-base font-bold text-gray-600">
                     *{invite.note}
                 </p>
-                <button className='transition-transform transform text-xl border rounded-2xl pt-2 pb-2 pl-6 pr-6 hover:scale-105 hover:text-red-400 hover:border-red-300 mt-5 ml-3 ' onClick={() => { sendInviteHandler }} >
+                <button className='transition-transform transform text-xl border rounded-2xl pt-2 pb-2 pl-6 pr-6 hover:scale-105 hover:text-red-400 hover:border-red-300 mt-5 ml-3 ' onClick={() => {  sendInviteHandler; }} >
                     Send Request
                 </button>
             </div>
