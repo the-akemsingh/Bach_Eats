@@ -7,14 +7,15 @@ import { poppins } from '@/app/fonts';
 function Navbar() {
     const session = useSession();
 
+
+
     return (
 
         <div
             className={`absolute top-0 left-0 w-full flex   justify-center gap-6 font-extrabold pt-7 pb-5 ${poppins.className}`}
-            // style={{zIndex:10}}
-            >
+        // style={{zIndex:10}}
+        >
             {session?.data?.user && <>
-                
                 <Link href="/invitations/new" className='transition-transform transform hover:scale-105 hover:text-gray-400'>
                     CREATE INVITE
                 </Link>

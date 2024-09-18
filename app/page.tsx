@@ -7,6 +7,7 @@ import { FlipWords } from "@/components/ui/flip-words";
 import { Lamp } from "@/components/ui/lamp";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { ActivitiesCard } from "@/components/page/activities";
+import ReqReceivedComponent from "@/components/page/ReqReceived";
 
 
 export default function Home() {
@@ -47,11 +48,13 @@ export default function Home() {
       </div> 
       {/* </BackgroundBeamsWithCollision> */}
       <ActivitiesCard></ActivitiesCard>
-      <Lamp></Lamp>
+      {/* <Lamp></Lamp> */}
 
       <div className="m-5">
         show invites here maybe some samples
       </div>
+
+      <ReqReceivedComponent></ReqReceivedComponent>
 
     </div>
   );

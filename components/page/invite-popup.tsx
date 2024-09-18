@@ -40,6 +40,7 @@ export default function InvitePopup({ invite, onClose }: InvitePopupProps) {
 
 
     const popupRef = useRef<HTMLDivElement | null>(null);
+    
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
