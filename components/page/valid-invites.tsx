@@ -1,7 +1,7 @@
 "use client";
 
 import { allValid_Invites } from "@/app/actions/getAll-Invites";
-import {  pacifico, poppins } from "@/app/fonts";
+import { pacifico, poppins } from "@/app/fonts";
 import { useEffect, useState } from "react";
 import InvitePopup from "./invite-popup";
 
@@ -68,8 +68,9 @@ export default function ValidInvites() {
                         ))}
                     </div>
                     {selectedInviteId && (
-                        <div className="absolute inset-0 bg-white backdrop-blur-sm z-10"></div>
+                        <div className="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm z-10"></div>
                     )}
+
                 </div>
             ) : (
                 <div className={`text-5xl mt-32 text-gray-500 text-center ${poppins.className} `}>

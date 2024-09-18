@@ -1,3 +1,4 @@
+"use server"
 import prisma from "@/PrismaClient";
 
 export default async function sendInviteReq({

@@ -7,7 +7,6 @@ import { poppins } from '@/app/fonts';
 function Navbar() {
     const session = useSession();
 
-
     return (
 
         <div
@@ -21,6 +20,9 @@ function Navbar() {
                 </Link>
                 <Link href="/invitations/all" className='transition-transform transform hover:scale-105 hover:text-gray-400'>
                     INVITATIONS
+                </Link>
+                <Link href="/profile" className='transition-transform transform hover:scale-105 hover:text-gray-400'>
+                    PROFILE
                 </Link>
                 <div className='flex'>
                     <button
