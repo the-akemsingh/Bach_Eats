@@ -8,7 +8,7 @@ export default async function isReqReceived(userId: string) {
       where: {
         hostId: userId,
         reqReceived: {
-          some: {}, 
+          some: {},
         },
       },
       include: {
@@ -27,3 +27,4 @@ export default async function isReqReceived(userId: string) {
     };
   }
 }
+

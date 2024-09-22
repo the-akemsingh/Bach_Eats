@@ -3,7 +3,7 @@
 const Loading = () => {
     return (
         <div>
-           lwfjnwjfpwe
+           Loading..
         </div>
     );
 };

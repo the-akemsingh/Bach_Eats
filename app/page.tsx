@@ -54,7 +54,7 @@ export default function Home() {
         show invites here maybe some samples
       </div>
 
-      <ReqReceivedComponent></ReqReceivedComponent>
+      {/* <ReqReceivedComponent></ReqReceivedComponent> */}
 
     </div>
   );

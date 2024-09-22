@@ -22,6 +22,9 @@ function Navbar() {
                 <Link href="/invitations/all" className='transition-transform transform hover:scale-105 hover:text-gray-400'>
                     INVITATIONS
                 </Link>
+                <Link href="/invitations/reqreceived" className='transition-transform transform hover:scale-105 hover:text-gray-400'>
+                    REQUESTS
+                </Link>
                 <Link href="/profile" className='transition-transform transform hover:scale-105 hover:text-gray-400'>
                     PROFILE
                 </Link>
