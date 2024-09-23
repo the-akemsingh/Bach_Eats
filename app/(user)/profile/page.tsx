@@ -70,7 +70,6 @@ export default function UserProfile() {
         </button>
       </div>
 
-      {/* Profile Information Section */}
       {activeTab === "profile" && (
         <div className="relative top-10 flex flex-col items-center p-8 shadow-xl rounded-2xl bg-gray-100 w-full max-w-2xl">
           <p className={`text-xl ${pacifico.className} text-gray-600 mb-6`}>
