@@ -1,4 +1,5 @@
 "use client"
+import AcceptInvite from "@/app/actions/acceptInvite";
 import getUserByID from "@/app/actions/getUserbyID";
 import isReqReceived from "@/app/actions/ReqReceived";
 import { useSession } from "next-auth/react";
@@ -64,6 +65,16 @@ export default function ReqReceived() {
         setSelectedInviteId(inviteId);
     }
 
+    async function acceptInvite(requester:string,inviteId:string){
+        const res=await AcceptInvite({requester,inviteId});
+        if(res?.status==201){
+            alert("invite accepted")
+        }
+        if(res?.status==500){
+            alert("Error occured")
+        }
+    }
+
     if (invites?.length === 0) {
         return (
             <div className="flex justify-center">
@@ -77,7 +88,6 @@ export default function ReqReceived() {
             <div className="col-span-1 flex flex-col mt-40 gap-2 p-6 overflow-y-auto">
                 {invites && invites.map((invite: inviteType) => (
                     <div
-                        key={invite.id}
                         className="relative bg-white shadow-lg rounded-lg p-4 flex flex-col hover:bg-red-200 transition-colors duration-300 cursor-pointer"
                         onClick={() => inviteClickHandler(invite.id)}
                     >
@@ -94,10 +104,11 @@ export default function ReqReceived() {
                 {selectedInviteId && requesters && requesters.length > 0 && (
                     <div>
                         {requesters.map((requester: requesterType) => (
-                            <div key={requester.id} className="bg-gray-100 p-4 mb-2 rounded-lg shadow">
+                            <div  className="bg-gray-100 p-4 mb-2 rounded-lg shadow">
                                 <div className="font-bold">{requester.name}</div>
                                 <div>Gender: {requester.gender}</div>
                                 <div>Instagram: {requester.instagramUsername || "N/A"}</div>
+                                <button className='transition-transform transform text-lg border rounded-2xl pt-1 pb-2 pl-4 pr-4 hover:scale-105 hover:text-red-400 hover:border-red-300 mt-5 ml-3' onClick={()=>acceptInvite(requester.id,selectedInviteId)} >Accept</button>
                             </div>
                         ))}
                     </div>

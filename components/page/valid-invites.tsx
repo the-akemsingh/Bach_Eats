@@ -11,6 +11,7 @@ interface Invite {
     pitch: string;
     note: string | null;
     slots: string;
+    emptyslots:string | null;
     host: {
         id: string;
     };

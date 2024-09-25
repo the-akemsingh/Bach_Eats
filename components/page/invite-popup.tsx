@@ -16,6 +16,7 @@ interface Invite {
     pitch: string;
     note: string | null;
     slots: string;
+    emptyslots: string | null;
     host: {
         id: string;
     };
@@ -38,9 +39,10 @@ export default function InvitePopup({ invite, onClose }: InvitePopupProps) {
     const session = useSession();
     const userId = session.data?.user.id as string
 
+    const isSlotsAvailable = Number(invite.slots) - Number(invite.emptyslots);
 
     const popupRef = useRef<HTMLDivElement | null>(null);
-    
+
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
@@ -79,18 +81,29 @@ export default function InvitePopup({ invite, onClose }: InvitePopupProps) {
                         Expecting guests: {invite.slots}
                     </p>
                 </div>
+                <div className="flex items-center mb-2">
+                    <FaUser className="text-black mr-2" />
+                    <p className="text-lg text-gray-600">
+                        Slots Empty: {invite.emptyslots}
+                    </p>
+                </div>
                 <p className="text-lg text-gray-700 mb-2">
                     {invite.pitch}
                 </p>
                 <p className="text-base font-bold text-gray-600">
                     *{invite.note}
                 </p>
-                <button
-                    className='transition-transform transform text-xl border rounded-2xl pt-2 pb-2 pl-6 pr-6 hover:scale-105 hover:text-red-400 hover:border-red-300 mt-5 ml-3'
-                    onClick={() => sendInviteHandler(invite.id, userId) }
-                >
-                    Send Request
-                </button>
+                {isSlotsAvailable > 0 ? (
+                    <button
+                        className='transition-transform transform text-xl border rounded-2xl pt-2 pb-2 pl-6 pr-6 hover:scale-105 hover:text-red-400 hover:border-red-300 mt-5 ml-3'
+                        onClick={() => sendInviteHandler(invite.id, userId)}
+                    >
+                        Send Request
+                    </button>
+                ) : (
+                    <span className="text-red-500 text-xl mt-5 ml-3">Full</span>
+                )}
+
             </div>
         </div>
     );

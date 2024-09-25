@@ -20,24 +20,35 @@ model User {
   password                String
   phonenumber             String              @unique
   gender                  Gender
-  instagramUsername       String?              @unique
+  instagramUsername       String?             @unique
   posts                   Invite[]
   isVerified              Boolean             @default(false)
   VerificationToken       String?
   verificationTokenExpiry DateTime?
   sentInviteReq           ReceivedInviteReq[]
+  AcceptedInvites         AcceptedInvites[]
 }
 
 model Invite {
-  id          String              @id @default(cuid())
-  heading     String
-  pitch       String
-  note        String?
-  slots       String
-  timeCreated DateTime            @default(now())
-  hostId      String
-  host        User                @relation(fields: [hostId], references: [id])
-  reqReceived ReceivedInviteReq[]
+  id              String              @id @default(cuid())
+  heading         String
+  pitch           String
+  note            String?
+  slots           String
+  emptyslots      String?
+  timeCreated     DateTime            @default(now())
+  hostId          String
+  host            User                @relation(fields: [hostId], references: [id])
+  reqReceived     ReceivedInviteReq[]
+  AcceptedInvites AcceptedInvites[]
+}
+
+model AcceptedInvites {
+  id       String @id @default(cuid())
+  inviteId String
+  guestId  String
+  invite   Invite @relation(fields: [inviteId], references: [id])
+  guest    User   @relation(fields: [guestId], references: [id])
 }
 
 model ReceivedInviteReq {

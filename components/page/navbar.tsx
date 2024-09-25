@@ -2,12 +2,12 @@
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import { poppins } from '@/app/fonts';
+import { useRouter } from 'next/navigation';
 
 
 function Navbar() {
     const session = useSession();
-
-
+    const Router=useRouter()
 
     return (
 
@@ -30,15 +30,13 @@ function Navbar() {
                 </Link>
                 <div className='flex'>
                     <button
-                        onClick={() => {
-                            signOut()
+                        onClick={async() => {
+                            await signOut();
+                            Router.push("/")                            
                         }}
                         className='transition-transform transform hover:scale-105 hover:text-gray-400'>
                         SIGNOUT
                     </button>
-                    {/* <Link href={'/profile'} className='ml-24 top-5 absolute'>
-                        <img width="35" height="35" src="https://img.icons8.com/ink/48/person-male.png" alt="person-male" />
-                    </Link> */}
                 </div>
             </>
             }

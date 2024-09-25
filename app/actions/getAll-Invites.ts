@@ -25,6 +25,7 @@ export async function allValid_Invites() {
         pitch: true,
         note: true,
         slots: true,
+        emptyslots:true,
         host: {
           select: {
             id: true,

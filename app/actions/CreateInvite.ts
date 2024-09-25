@@ -41,6 +41,7 @@ export async function CreateNewInvite({
         hostId,
         note,
         slots,
+        emptyslots:slots,
       },
     });
     return {
