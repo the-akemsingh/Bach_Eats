@@ -23,7 +23,7 @@ const Signin = () => {
                 }}
                 className="col-span-1"
             >
-                <Link href={'/'} className={`absolute  left-32 ml-2 top-4 text-6xl text-white ${jersey_10.className}`} style={{ zIndex: 10 }}>
+                <Link href={'/'} className={` absolute ml-32 mt-4 text-6xl text-white  ${jersey_10.className}`} style={{ backgroundColor: 'transparent', zIndex: 10 }} >
                     BE
                 </Link>
             </div>
