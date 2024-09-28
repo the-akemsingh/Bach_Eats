@@ -1,7 +1,9 @@
 "use client"
 import AcceptInvite from "@/app/actions/acceptInvite";
+import deleteRequest from "@/app/actions/deleteRequest";
 import getUserByID from "@/app/actions/getUserbyID";
 import isReqReceived from "@/app/actions/ReqReceived";
+import { poppins } from "@/app/fonts";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
@@ -10,7 +12,7 @@ interface inviteType {
     heading: string;
     pitch: string;
     note: string | null;
-    slots: string;
+    slots: number;
     timeCreated: Date;
     hostId: string;
     reqReceived: {
@@ -70,6 +72,19 @@ export default function ReqReceived() {
         if(res?.status==201){
             alert("invite accepted")
         }
+        if(res?.status==400){
+            alert(res.message)
+        }
+        if(res?.status==500){
+            alert("Error occured")
+        }
+    }
+
+    async function deleteInviteRequest(requester:string,inviteId:string){
+        const res=await deleteRequest(requester,inviteId);
+        if(res?.status==200){
+            alert("Request deleted")
+        }
         if(res?.status==500){
             alert("Error occured")
         }
@@ -77,7 +92,7 @@ export default function ReqReceived() {
 
     if (invites?.length === 0) {
         return (
-            <div className="flex justify-center">
+            <div className={`text-5xl pt-52 text-gray-500 text-center ${poppins.className} `}>
                 <div>No Requests</div>
             </div>
         );
@@ -109,6 +124,8 @@ export default function ReqReceived() {
                                 <div>Gender: {requester.gender}</div>
                                 <div>Instagram: {requester.instagramUsername || "N/A"}</div>
                                 <button className='transition-transform transform text-lg border rounded-2xl pt-1 pb-2 pl-4 pr-4 hover:scale-105 hover:text-red-400 hover:border-red-300 mt-5 ml-3' onClick={()=>acceptInvite(requester.id,selectedInviteId)} >Accept</button>
+                                
+                                <button className='transition-transform transform text-lg border rounded-2xl pt-1 pb-2 pl-4 pr-4 hover:scale-105 hover:text-red-400 hover:border-red-300 mt-5 ml-3' onClick={()=>deleteInviteRequest(requester.id,selectedInviteId)} >Delete</button>
                             </div>
                         ))}
                     </div>

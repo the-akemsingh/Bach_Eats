@@ -3,7 +3,6 @@
 import { FaUser } from "react-icons/fa";
 import { calistoga, pacifico } from "@/app/fonts";
 import { useEffect, useRef, useState } from "react";
-import sendInviteReq from "@/app/actions/sendInviteReq";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -16,8 +15,8 @@ interface Invite {
     heading: string;
     pitch: string;
     note: string | null;
-    slots: string;
-    emptyslots: string | null;
+    slots: number;
+    emptyslots: number;
     host: {
         id: string;
     };
@@ -96,7 +95,7 @@ export default function InvitePopup({ invite, onClose }: InvitePopupProps) {
                         </p>
                         {(Number(invite.slots) >= Number(invite.emptyslots) && Number(invite.emptyslots) > 0) ? (
                             <button
-                                className="transition-transform transform text-xl border rounded-2xl pt-2 pb-2 pl-6 pr-6 hover:scale-95 hover:text-red-400 hover:border-red-300 mt-5 ml-3"
+                                className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
                                 onClick={() => sendInviteHandler(invite.id)}
                             >
                                 Contact

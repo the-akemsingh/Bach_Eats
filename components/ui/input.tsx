@@ -1,25 +1,27 @@
 import { useState } from "react";
 
 
-const Input = ({ value, placeholder, onChange }: {
+const Input = ({ value, placeholder, onChange, type }: {
     value: string,
     placeholder: string,
+    type: string,
     onChange: (e: any) => void
 }) => {
     return (
-        <div className="w-full max-w-xs  bg-gray-100 rounded-lg font-mono">
-            <label className="block text-gray-700 text-sm font-bold mb-2"
-            >{value}</label>
+        <div className="w-full max-w-xs bg-gray-100 rounded-lg font-mono">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+                {value}
+            </label>
             <input
                 onChange={(e) => onChange(e)}
-                className="text-sm custom-input w-full px-4 py-2 border text-black border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:outline-blue-300 hover:shadow-lg hover:border-yellow-700 bg-gray-100"
+                className="text-sm custom-input w-full px-4 py-2 border text-black border-gray-300 rounded-lg shadow-sm transition duration-300 ease-in-out transform focus:outline-blue-300 hover:shadow-lg hover:border-yellow-700 bg-gray-100  "
                 placeholder={placeholder}
-                type="zz"
-                id=""
+                type={type}
+                min={type === "number" ? "0" : undefined}
             />
         </div>
     );
-}
+};
 
 const PasswordInput = ({ value, onChange }: {
     value: string,

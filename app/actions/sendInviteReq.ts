@@ -9,7 +9,20 @@ export default async function sendInviteReq({
   guestId: string;
 }) {
   try {
-
+    //check if request already sent
+    const requestExists = await prisma.receivedInviteReq.findFirst({
+      where: {
+        inviteId,
+        fromId: guestId,
+      },
+    });
+    if (requestExists) {
+      return {
+        message: "Request already sent",
+        status: 200,
+      };
+    }
+    //send request
     const newRequest= await prisma.receivedInviteReq.create({
         data:{
             inviteId,

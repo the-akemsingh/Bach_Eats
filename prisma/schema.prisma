@@ -25,7 +25,7 @@ model User {
   isVerified              Boolean             @default(false)
   VerificationToken       String?
   verificationTokenExpiry DateTime?
-  sentInviteReq           ReceivedInviteReq[]
+  sentInviteReq           ReceivedInviteReq[]  
   AcceptedInvites         AcceptedInvites[]
 }
 
@@ -34,12 +34,12 @@ model Invite {
   heading         String
   pitch           String
   note            String?
-  slots           String
-  emptyslots      String?
+  slots           Int
+  emptyslots      Int
   timeCreated     DateTime            @default(now())
   hostId          String
   host            User                @relation(fields: [hostId], references: [id])
-  reqReceived     ReceivedInviteReq[]
+  reqReceived     ReceivedInviteReq[] 
   AcceptedInvites AcceptedInvites[]
 }
 
@@ -47,7 +47,7 @@ model AcceptedInvites {
   id       String @id @default(cuid())
   inviteId String
   guestId  String
-  invite   Invite @relation(fields: [inviteId], references: [id])
+  invite   Invite @relation(fields: [inviteId], references: [id],onDelete: Cascade)
   guest    User   @relation(fields: [guestId], references: [id])
 }
 
@@ -55,7 +55,7 @@ model ReceivedInviteReq {
   id        String @id @default(cuid())
   inviteId  String
   fromId    String
-  invite    Invite @relation(fields: [inviteId], references: [id])
+  invite    Invite @relation(fields: [inviteId], references: [id],onDelete: Cascade)
   Requestor User   @relation(fields: [fromId], references: [id])
 }
 

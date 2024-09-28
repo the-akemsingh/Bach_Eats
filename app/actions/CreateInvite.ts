@@ -13,7 +13,7 @@ export async function CreateNewInvite({
   heading: string;
   pitch: string;
   note: string | null ;
-  slots: string;
+  slots: number;
 }) {
   const session = await getServerSession(authOptions);
 
