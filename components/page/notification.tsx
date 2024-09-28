@@ -81,7 +81,7 @@ export default function AcceptedInvitesNotification() {
         <button className='mt-2 ml-2 transition-transform hover:scale-105 ' onClick={() => setShowPopup(!showPopup)}>
             <Image alt='notification' src={'/images/notification.svg'} height={30} width={30} />
         </button>
-        {showPopup && notification && (
+        {showPopup  && (
             <div
                 ref={popupRef}
                 className={`absolute top-12 left-0 bg-black text-white p-4 rounded-lg shadow-lg z-50 min-w-max transition-transform transform ${poppins.className}`}
@@ -94,8 +94,8 @@ export default function AcceptedInvitesNotification() {
                             <p>Details: {invite.pitch}</p>
                         </div>
                     ))
-                ) : 
-                <div className="text-sm">No accepted proposals</div>}
+                ) : <div className="text-sm">No accepted proposals</div>
+                }
             </div>
         )}
     </>

@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import { jersey_10 } from '@/app/fonts';
-import AcceptedInvitesNotification from './notificatoin';
+import AcceptedInvitesNotification from './notification';
 
 
 

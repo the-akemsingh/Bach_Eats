@@ -15,9 +15,9 @@ export async function allValid_Invites() {
         hostId: {
           not: userId, 
         },
-        // timeCreated: {
-        //   gte: threeHoursAgo, 
-        // },
+        timeCreated: {
+          gte: threeHoursAgo, 
+        },
       },
       select: {
         id: true,

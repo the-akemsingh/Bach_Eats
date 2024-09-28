@@ -42,6 +42,9 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
     const [requestsent, setRequestsent] = useState<boolean>(false);
     const [showPopup, setShowPopup] = useState<boolean>(false);
     const [host, setHost] = useState<userType | null>(null);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
+
 
 
     useEffect(() => {
@@ -60,6 +63,18 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
         getHost();
     }, [invite]);
 
+    useEffect(() => {
+        async function checkAdmin() {
+            if (userId === host?.id) {
+                setIsAdmin(true);
+            } else {
+                setIsAdmin(false);
+            }
+        }
+        checkAdmin();
+    }, [invite, userId]);
+
+
     async function sendReqHandler() {
         try {
             const res = await sendInviteReq({ inviteId: id, guestId: userId! });
@@ -72,6 +87,15 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
             }
         } catch (e) {
             alert("Error occurred while sending request");
+        }
+    }
+
+    async function getGuestList() {
+        try {
+            alert("Fetching guest list");
+        }
+        catch (e) {
+            alert("Error occurred while fetching guest list");
         }
     }
 
@@ -102,7 +126,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
                         {host && (
                             <>
                                 <p className="flex mt-4 mb-4 gap-2">
-                                <Image src={'/images/instagramIcon.svg'} height={25} width={25} alt="Instagram" />
+                                    <Image src={'/images/instagramIcon.svg'} height={25} width={25} alt="Instagram" />
                                     <a
                                         className="text-blue-500 "
                                         href={`https://www.instagram.com/${host.instagramUsername}`}
@@ -131,16 +155,29 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
                     </div>
 
                     <div className="flex gap-4 justify-center mt-8">
-                        {(invite.slots) >= invite.emptyslots && invite.emptyslots > 0 ? (
+                        {!isAdmin && (
+                            <div>
+                                {(invite.slots) >= invite.emptyslots && invite.emptyslots > 0 ? (
+                                    <button
+                                        onClick={() => sendReqHandler()}
+                                        className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
+                                    >
+                                        {!requestsent ? "Send Request" : "Request Sent"}
+                                    </button>
+                                ) : (
+                                    <span className="text-red-500 text-xl">No Slots Available</span>
+                                )}
+                            </div>
+                        )}
+                        {isAdmin && (
                             <button
-                                onClick={() => sendReqHandler()}
+                                onClick={() => getGuestList()}
                                 className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
                             >
-                                {!requestsent ? "Send Request" : "Request Sent"}
+                                Approved Guest List
                             </button>
-                        ) : (
-                            <span className="text-red-500 text-xl">No Slots Available</span>
                         )}
+
                     </div>
                 </div>
             </div>
