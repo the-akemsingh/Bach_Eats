@@ -2,7 +2,7 @@
 
 import prisma from "@/PrismaClient"
 
-export default async function deleteRequest(requesterId:string,inviteId:string){
+export default async function deleteRequest({requesterId,inviteId}:{requesterId:string,inviteId:string}){
     try{
         const res=await prisma.receivedInviteReq.deleteMany(
             {

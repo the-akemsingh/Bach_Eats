@@ -29,7 +29,12 @@ function Navbar() {
                     </Link>
                     <div className='flex'>
                         <button
-                            onClick={() => signOut({ callbackUrl: "/" })}
+                            onClick={() => {
+                                if (confirm("Are you sure you want to sign out?")) {
+                                    signOut({ callbackUrl: "/" });
+                                }
+                            }
+                            }
                             className="transition-transform transform hover:scale-105 text-3xl hover:text-gray-400"
                         >
                             SIGNOUT
@@ -38,7 +43,7 @@ function Navbar() {
                     </div>
 
                     <div className='relative'>
-                       <AcceptedInvitesNotification></AcceptedInvitesNotification>
+                        <AcceptedInvitesNotification></AcceptedInvitesNotification>
                     </div>
                 </>
             ) : (

@@ -41,11 +41,23 @@ export default function UserProfile() {
 
     fetchUserInvites();
   }, [userId]);
+  
+  async function fetchUserInvitesAgain() {
+    try {
+      const res = await UserInvites(userId);
+      if (res.invites) {
+        setInvites(res.invites);
+      }
+    } catch (e) {
+      console.error("Error fetching invites", e);
+    }
+  }
 
   async function inviteDeleteHandler(inviteId: string) {
     const res = await deleteInvite(inviteId);
     if (res.status === 200) {
       alert("Invite Deleted")
+      fetchUserInvitesAgain();
     }
   }
 

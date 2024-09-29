@@ -4,6 +4,9 @@ import ValidInvites from "@/components/page/valid-invites";
 
 
 export default async function AllInvites() {
+    //delay the content to 5 seconds
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    
     return (
         <div className="min-h-screen relative top-32 flex flex-col items-center bg-white">
             <div className="flex flex-col gap-6 items-center justify-center w-full px-4">

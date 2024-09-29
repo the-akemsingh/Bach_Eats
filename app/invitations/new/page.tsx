@@ -17,7 +17,7 @@ export default function NewInvite() {
             const res = await CreateNewInvite({ heading, pitch, note, slots });
             alert(res.message);
             if (res.status === 201) {
-                Router.push("/invitations/all");
+                Router.push(`/invitations/${res.id}`);
             }
         } catch (e) {
             console.log(e);

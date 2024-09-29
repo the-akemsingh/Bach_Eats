@@ -3,10 +3,10 @@
 import prisma from "@/PrismaClient";
 
 export default async function AcceptInvite({
-  requester,
+  requesterId,
   inviteId,
 }: {
-  requester: string;
+  requesterId: string;
   inviteId: string;
 }) {
   try {
@@ -33,7 +33,7 @@ export default async function AcceptInvite({
     const accepted = await prisma.acceptedInvites.findFirst({
       where: {
         inviteId: inviteId,
-        guestId: requester,
+        guestId: requesterId,
       },
     });
 
@@ -47,10 +47,11 @@ export default async function AcceptInvite({
     //accept the invite
     const res = await prisma.acceptedInvites.create({
       data: {
-        guestId: requester,
+        guestId: requesterId,
         inviteId: inviteId,
       },
     });
+
     const res2 = await prisma.invite.update({
       where: {
         id: inviteId,
@@ -64,6 +65,7 @@ export default async function AcceptInvite({
     return {
       status: 201,
     };
+    
   } catch (e) {
     console.log(e);
     return {

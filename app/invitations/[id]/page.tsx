@@ -7,6 +7,8 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import Image from "next/image";
+import getGuestList from "@/app/actions/getGuestList";
+import deleteGuest from "@/app/actions/deleteGuest";
 
 
 interface InviteDetailsProps {
@@ -43,6 +45,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
     const [showPopup, setShowPopup] = useState<boolean>(false);
     const [host, setHost] = useState<userType | null>(null);
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [guests, setGuests] = useState<userType[] | null>(null);
 
 
 
@@ -65,7 +68,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
 
     useEffect(() => {
         async function checkAdmin() {
-            if (userId === host?.id) {
+            if (userId === invite?.hostId) {
                 setIsAdmin(true);
             } else {
                 setIsAdmin(false);
@@ -90,9 +93,12 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
         }
     }
 
-    async function getGuestList() {
+    async function fetchGuestList() {
         try {
-            alert("Fetching guest list");
+            const guests = await getGuestList({ inviteId: id });
+            if (guests.status === 200) {
+                setGuests(guests.users as userType[]);
+            }
         }
         catch (e) {
             alert("Error occurred while fetching guest list");
@@ -101,6 +107,19 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
 
     function closePopup() {
         setShowPopup(false);
+    }
+
+    async function DeleteThisGuestHandler({ inviteId, guestId }: { inviteId: string, guestId: string }) {
+        try {
+            const res = await deleteGuest({ inviteId: inviteId, guestId: guestId });
+            alert(JSON.stringify(res));
+            if (res.status === 200) {
+                await fetchGuestList();
+                alert("Guest Deleted Successfully");
+            }
+        } catch (e) {
+            alert("Error occurred while sending request");
+        }
     }
 
     if (!invite) {
@@ -171,7 +190,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
                         )}
                         {isAdmin && (
                             <button
-                                onClick={() => getGuestList()}
+                                onClick={() => fetchGuestList()}
                                 className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
                             >
                                 Approved Guest List
@@ -181,6 +200,47 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
                     </div>
                 </div>
             </div>
+
+            {guests && guests.length > 0 ? (
+                <div className="w-full mt-11 max-w-screen-lg mx-auto">
+                    <div className="flex flex-col p-6 mb-4 bg-gray-100 shadow-lg rounded-xl">
+                        <h2 className="text-2xl mb-4">Approved Guest List</h2>
+                        <div className="flex flex-col gap-4">
+                            {guests.map((guest) => (
+                                <div key={guest.id} className="flex flex-col gap-4">
+                                    <div className="flex items-center gap-5 pl-1">
+                                        <FaUser className="text-black" />
+                                        <span className="text-lg text-gray-600">{guest.name}</span>
+                                    </div>
+                                    <div className="flex gap-3">
+                                        <Image src={'/images/instagramIcon.svg'} height={25} width={25} alt="Instagram" />
+                                        <a
+                                            className="text-blue-500 "
+                                            href={`https://www.instagram.com/${guest.instagramUsername}`}
+                                            target="_blank"
+                                            rel=""
+                                        >
+                                            @{guest.instagramUsername}
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <button
+                                            onClick={() =>
+                                                confirm("Are you sure you want to delete this guest?") && DeleteThisGuestHandler({ inviteId: invite.id, guestId: guest.id! })}
+                                            className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
+                                        >
+                                            Delete Guest
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                null
+            )}
+
 
             {showPopup && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

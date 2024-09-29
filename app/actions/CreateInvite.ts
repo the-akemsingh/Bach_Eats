@@ -46,6 +46,7 @@ export async function CreateNewInvite({
     });
     return {
       message: "Invite created successfuly",
+      id: post.id,
       status: 201,
     };
   } catch (e) {
