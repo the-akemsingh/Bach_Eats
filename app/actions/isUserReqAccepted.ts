@@ -2,21 +2,35 @@
 
 import prisma from "@/PrismaClient";
 
-export default async function isUserReqAccepted({inviteId,userId,}:{inviteId: string;userId: string;}){
+export default async function isUserReqAccepted({
+  inviteId,
+  userId,
+}: {
+  inviteId: string;
+  userId: string;
+}) {
   try {
     const res = await prisma.acceptedInvites.findFirst({
-      where:{
+      where: {
         inviteId: inviteId,
         guestId: userId,
       },
     });
-    return{
-        message: "Request Accepted",
+
+    if (res) {
+      return {
+        message: "Request Already Accepted",
         status: 201,
+      };
+    } else {
+      return {
+        message: "Request Not Accepted",
+        status: 404,
+      };
     }
   } catch (e) {
     return {
-      message: "Error occured",
+      message: "Error occurred",
       status: 500,
     };
   }

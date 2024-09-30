@@ -10,6 +10,7 @@ import Image from "next/image";
 import getGuestList from "@/app/actions/getGuestList";
 import deleteGuest from "@/app/actions/deleteGuest";
 import { inviteType, userType } from "@/types";
+import isUserReqAccepted from "@/app/actions/isUserReqAccepted";
 
 
 interface InviteDetailsProps {
@@ -18,20 +19,19 @@ interface InviteDetailsProps {
     };
 }
 
-
-
-
 export default function InviteDetails({ params }: InviteDetailsProps) {
     const { id } = params;
+
     const session = useSession();
     const userId = session.data?.user.id;
+
     const [invite, setInvite] = useState<inviteType | null>(null);
     const [requestsent, setRequestsent] = useState<boolean>(false);
     const [showPopup, setShowPopup] = useState<boolean>(false);
     const [host, setHost] = useState<userType | null>(null);
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const [guests, setGuests] = useState<userType[] | null>(null);
-
+    const [isUserAccpeted, setIsUserAccepted] = useState<boolean>(false);
 
 
 
@@ -61,6 +61,17 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
         }
         checkAdmin();
     }, [invite, userId]);
+
+    useEffect(() => {
+        async function checkUserReqAccepted() {
+            const res = await isUserReqAccepted({ inviteId: id, userId: userId! });
+            if (res.status === 201) {
+                setIsUserAccepted(true);
+            }
+        }
+        checkUserReqAccepted();
+    }, [id, userId]);
+
 
 
     async function sendReqHandler() {
@@ -97,7 +108,6 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
     async function DeleteThisGuestHandler({ inviteId, guestId }: { inviteId: string, guestId: string }) {
         try {
             const res = await deleteGuest({ inviteId: inviteId, guestId: guestId });
-            alert(JSON.stringify(res));
             if (res.status === 200) {
                 await fetchGuestList();
                 alert("Guest Deleted Successfully");
@@ -161,16 +171,36 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
                     <div className="flex gap-4 justify-center mt-8">
                         {!isAdmin && (
                             <div>
-                                {(invite.slots) >= invite.emptyslots && invite.emptyslots > 0 ? (
-                                    <button
-                                        onClick={() => sendReqHandler()}
-                                        className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
-                                    >
-                                        {!requestsent ? "Send Request" : "Request Sent"}
-                                    </button>
+                                {isUserAccpeted ? (
+                                    <div>
+                                        <span className="text-green-500 text-xl">Request Accepted</span>
+                                        <div>
+                                            <button
+                                                onClick={() =>
+                                                    confirm("Are you sure you want to cancel your request?") && DeleteThisGuestHandler({ inviteId: invite.id, guestId: userId! })}
+                                                className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
+                                            >
+                                                Cancel Request
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
                                 ) : (
-                                    <span className="text-red-500 text-xl">No Slots Available</span>
+                                    <div>
+                                        {(invite.slots) >= invite.emptyslots && invite.emptyslots > 0 ? (
+                                            <button
+                                                onClick={() => sendReqHandler()}
+                                                className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
+                                            >
+                                                {!requestsent ? "Send Request" : "Request Sent"}
+                                            </button>
+                                        ) : (
+                                            <span className="text-red-500 text-xl">No Slots Available</span>
+                                        )}
+                                    </div>
                                 )}
+
+
                             </div>
                         )}
                         {isAdmin && (

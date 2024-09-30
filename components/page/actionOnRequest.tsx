@@ -22,9 +22,10 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
                     selectedInvite.reqReceived.map(async (request) => {
                         const user = (await getUserByID(request.fromId)).user!;
                         const res = await isUserReqAccepted({ inviteId: request.inviteId, userId: request.fromId });
+                        const isAccepted = res.status === 201 ? true : false;
                         return {
                             ...user,
-                            isAccepted: res.status === 201,
+                            isAccepted,
                         }
 
                     })
@@ -85,13 +86,15 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
                         <div>Instagram: {requester.instagramUsername || "N/A"}</div>
                         {!requester.isAccepted ? (
                             <div>
-                                <button className='transition-transform transform text-lg border rounded-2xl pt-1 pb-2 pl-4 pr-4 hover:scale-105 hover:text-red-400 hover:border-red-300 mt-5 ml-3' onClick={() => acceptInvite(requester.id, selectedInvite)} >Accept</button>
+                                <button className='transition-transform transform text-lg border rounded-2xl pt-1 pb-2 pl-4 pr-4 hover:scale-105 hover:text-red-400 hover:border-red-300 mt-5 ml-3' onClick={async () => {
+                                    await acceptInvite(requester.id, selectedInvite)
+                                }
+                                } >Accept</button>
                                 <button className='transition-transform transform text-lg border rounded-2xl pt-1 pb-2 pl-4 pr-4 hover:scale-105 hover:text-red-400 hover:border-red-300 mt-5 ml-3' onClick={() => deleteInviteRequest(requester.id, selectedInvite)} >Delete</button>
                             </div>
                         ) : (
                             <div className="text-green-500">Accepted</div>
                         )}
-
 
                     </div>
                 ))}

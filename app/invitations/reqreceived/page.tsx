@@ -13,16 +13,10 @@ import {  useEffect, useState } from "react";
 export default function ReqReceived() {
     const [invites, setInvites] = useState<inviteWithRequestsType[] | null>(null);
     const [selectedInvite, setSelectedInvite] = useState<inviteWithRequestsType | null>(null);
-    if (invites?.length === 0) {
-        return (
-            <div className={`text-5xl pt-52 text-gray-500 text-center ${poppins.className} `}>
-                <div>No Requests</div>
-            </div>
-        );
-    }
+
     const session = useSession();
     const userID = session.data?.user.id!;
-
+    
     useEffect(() => {
         async function getInvites() {
             const res = (await isReqReceived(userID)).invites!;
@@ -30,7 +24,14 @@ export default function ReqReceived() {
         }
         getInvites();
     }, [userID]);
-
+    
+    if (invites?.length === 0) {
+        return (
+            <div className={`text-5xl pt-52 text-gray-500 text-center ${poppins.className} `}>
+                <div>No Requests</div>
+            </div>
+        );
+    }
     return (
         <div className="grid grid-cols-3 h-screen">
             <ReceivedRequests setSelectedInvite={setSelectedInvite}  invites={invites} /> 
