@@ -15,8 +15,6 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
 
     useEffect(() => {
         async function getRequesterDetails() {
-            // if (selectedInviteId) {
-            //     const selectedInvite = invites?.find(invite => invite.id === selectedInviteId);
             if (selectedInvite) {
                 const requesterData = await Promise.all(
                     selectedInvite.reqReceived.map(async (request) => {
@@ -31,7 +29,6 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
                     })
                 );
                 setRequesters(requesterData);
-                // }
             }
         }
         getRequesterDetails();
@@ -79,7 +76,7 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
         {selectedInvite && requesters && requesters.length > 0 && (
             <div>
                 {requesters.map((requester: requesterType) => (
-                    <div className="bg-gray-100 p-4 mb-2 rounded-lg shadow">
+                    <div  key={requester.id} className="bg-gray-100 p-4 mb-2 rounded-lg shadow">
 
                         <div className="font-bold">{requester.name}</div>
                         <div>Gender: {requester.gender}</div>

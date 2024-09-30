@@ -3,7 +3,7 @@
 import {  useEffect, useState } from "react";
 import { VerifyMail } from "@/app/actions/VerifyMail";
 
-const VerifyMail_Page = async () => {
+const VerifyMail_Page = () => {
 
     const [token, setToken] = useState("");
 

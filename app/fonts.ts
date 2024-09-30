@@ -1,4 +1,4 @@
-import { Calistoga, Merriweather, Poppins,Pacifico,Jersey_10 } from "next/font/google";
+import { Calistoga, Merriweather, Poppins,Pacifico,Spicy_Rice } from "next/font/google";
 
 const calistoga = Calistoga({
   weight: ["400"],
@@ -20,7 +20,7 @@ const pacifico = Pacifico({
   subsets: ["latin"],
   preload: true,
 });
-const jersey_10 = Jersey_10({
+const jersey_10 = Spicy_Rice({
   weight: ["400"],
   subsets: ["latin"],
   preload: true,

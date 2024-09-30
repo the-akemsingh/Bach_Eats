@@ -29,7 +29,7 @@ const DummyContent1 = () => {
                     <span className="font-bold text-neutral-700 dark:text-neutral-200">
                     Not in the mood to cook? No worries!
                     </span>{" "}
-                    Find people nearby who are also looking to share a homemade meal. Whether you join someone for dinner or invite others to your place, it’s a simple way to skip the hassle of cooking alone and enjoy a cozy, shared experience. Connect with like-minded individuals, taste different homemade dishes, and make new friends along the way. Just pick an invite, show up, and enjoy a good meal with great company— no pots and pans required!
+                    Find people nearby who are also looking to share a homemade meal. Whether you join someone for dinner or invite others to your place, it&#39;s a simple way to skip the hassle of cooking alone and enjoy a cozy, shared experience. Connect with like-minded individuals, taste different homemade dishes, and make new friends along the way. Just pick an invite, show up, and enjoy a good meal with great company— no pots and pans required!
                 </p>
                 {/* <Image
                     src="https://assets.aceternity.com/macbook.png"
@@ -51,9 +51,9 @@ const DummyContent2 = () => {
             >
                 <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
                     <span className="font-bold text-neutral-700 dark:text-neutral-200">
-                    Have some extra supper? Don’t let it go to waste!
+                    Have some extra supper? Don&#39;t let it go to waste!
                     </span>{" "}
-                    Extend an invitation and turn it into an opportunity to meet new people! Whether it's leftovers or a dish you made too much of, inviting others to share a meal is a simple way to connect. You'll not only clear some space in the fridge but also build new friendships in the process. It’s about more than just food; it’s a way to bring people together, share stories, and enjoy a relaxed, homey atmosphere. So, why eat alone when you can create lasting connections over supper?
+                    Extend an invitation and turn it into an opportunity to meet new people! Whether it's leftovers or a dish you made too much of, inviting others to share a meal is a simple way to connect. You'll not only clear some space in the fridge but also build new friendships in the process. It&#39;s about more than just food; it&#39;s a way to bring people together, share stories, and enjoy a relaxed, homey atmosphere. So, why eat alone when you can create lasting connections over supper?
                 </p>
                 {/* <Image
                     src="https://assets.aceternity.com/macbook.png"
@@ -77,7 +77,7 @@ const DummyContent3 = () => {
                     <span className="font-bold text-neutral-700 dark:text-neutral-200">
                     Got a special recipe you're proud of?
                     </span>{" "}
-                     Why not share it with others and make it a memorable experience? Invite people over to taste your culinary creation and enjoy the satisfaction of bringing your dish to life for an appreciative crowd. Whether it’s a family secret or something you’ve perfected over time, sharing food is a great way to connect with others. You’ll not only get to showcase your cooking skills but also bond over the joy of a good meal. Who knows? You might even inspire someone to try something new in their own kitchen!
+                     Why not share it with others and make it a memorable experience? Invite people over to taste your culinary creation and enjoy the satisfaction of bringing your dish to life for an appreciative crowd. Whether it&#39;s a family secret or something you&#39;ve perfected over time, sharing food is a great way to connect with others. You&#39;ll not only get to showcase your cooking skills but also bond over the joy of a good meal. Who knows? You might even inspire someone to try something new in their own kitchen!
                 </p>
                 {/* <Image
                     src="https://assets.aceternity.com/macbook.png"
@@ -101,7 +101,7 @@ const DummyContent4 = () => {
                     <span className="font-bold text-neutral-700 dark:text-neutral-200">
                     Feeling stuck or want to boost your productivity?
                     </span>{" "}
-                    Find a coding partner and take your development game to the next level! Working alongside someone else can help you stay motivated, exchange ideas, and solve problems faster. Whether you're tackling bugs, brainstorming solutions, or just need accountability, teaming up with a fellow coder creates a productive and fun environment. It's also a great way to share knowledge, learn new techniques, and improve your skills. Don’t code alone—find a partner and elevate your workflow through collaboration!
+                    Find a coding partner and take your development game to the next level! Working alongside someone else can help you stay motivated, exchange ideas, and solve problems faster. Whether you're tackling bugs, brainstorming solutions, or just need accountability, teaming up with a fellow coder creates a productive and fun environment. It's also a great way to share knowledge, learn new techniques, and improve your skills. Don&#39;t code alone—find a partner and elevate your workflow through collaboration!
                 </p>
                 {/* <Image
                     src="https://assets.aceternity.com/macbook.png"
@@ -125,7 +125,7 @@ const DummyContent5 = () => {
                     <span className="font-bold text-neutral-700 dark:text-neutral-200">
                     Looking to give back after a great experience?
                     </span>{" "}
-                     You’ve just made new friends, so why not keep the connection going? Invite them over next time and return the favor. Sharing a meal is more than just food—it’s about creating lasting bonds and showing appreciation for the company. Whether it's hosting them for dinner or joining in on another activity, inviting them back builds stronger connections. It’s an easy way to turn a simple meal into a meaningful friendship, making both your day and theirs a little brighter.
+                     You&#39;ve just made new friends, so why not keep the connection going? Invite them over next time and return the favor. Sharing a meal is more than just food—it&#39;s about creating lasting bonds and showing appreciation for the company. Whether it's hosting them for dinner or joining in on another activity, inviting them back builds stronger connections. It&#39;s an easy way to turn a simple meal into a meaningful friendship, making both your day and theirs a little brighter.
                 </p>
                 {/* <Image
                     src="https://assets.aceternity.com/macbook.png"

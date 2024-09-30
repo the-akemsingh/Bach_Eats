@@ -68,15 +68,15 @@ export default function AcceptedInvitesNotification() {
         <button className='mt-2 ml-2 transition-transform hover:scale-105 ' onClick={() => setShowPopup(!showPopup)}>
             <Image alt='notification' src={'/images/notification.svg'} height={30} width={30} />
         </button>
-        {showPopup  && (
-            <div
+        {showPopup && (
+            <div 
                 ref={popupRef}
                 className={`absolute top-12 left-0 bg-black text-white p-4 rounded-lg shadow-lg z-50 min-w-max transition-transform transform ${poppins.className}`}
             >
                 <h3 className="font-bold text-lg mb-2">Accepted Proposals</h3>
                 {invites && invites.length > 0 ? (
                     invites.map((invite: inviteType) => (
-                        <div className="mb-2 p-4 hover:scale-95 " onClick={() => Router.push(`/invitations/${invite.id}`)}>
+                        <div key={invite.id} className="mb-2 p-4 hover:scale-95 " onClick={() => Router.push(`/invitations/${invite.id}`)}>
                             <h4 className="font-semibold">Invite: {invite.heading}</h4>
                             <p>Details: {invite.pitch}</p>
                         </div>

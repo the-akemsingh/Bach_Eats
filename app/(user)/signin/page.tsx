@@ -79,7 +79,7 @@ const Signin = () => {
 
                         <hr className="border-black w-full mt-2 mb-2" />
                         <span>
-                            Don't have an account?{" "}
+                            Don&#39;t have an account?{" "}
                             <button
                                 className="text-blue-500"
                                 onClick={() => Router.push("/signup")}

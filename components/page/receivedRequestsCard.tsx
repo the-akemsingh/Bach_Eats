@@ -16,6 +16,7 @@ export default function ReceivedRequests({ setSelectedInvite, invites }: {
         <div className="col-span-1 flex flex-col mt-40 gap-2 p-6 overflow-y-auto">
             {invites && invites.map((invite: inviteWithRequestsType) => (
                 <div
+                    key={invite.id}
                     className="relative bg-white shadow-lg rounded-lg p-4 flex flex-col hover:bg-red-200 transition-colors duration-300 cursor-pointer"
                     onClick={() => inviteClickHandler(invite)}
                 >
