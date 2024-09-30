@@ -14,6 +14,7 @@ const Signin = () => {
 
     return (
         <div className="grid grid-cols-2 h-screen">
+
             <div
                 style={{
                     backgroundImage: "url('/images/red flower centre.jpg')",
@@ -34,7 +35,7 @@ const Signin = () => {
                         <div className="text-5xl font-bold">Signin</div>
                     </div>
                     <div className="flex flex-col items-center gap-3 mt-8">
-                        <Input placeholder="Bachelors@gmail.com" value="Email" onChange={(e) => setEmail(e.target.value)} />
+                        <Input type="text" placeholder="Bachelors@gmail.com" value="Email" onChange={(e) => setEmail(e.target.value)} />
                         <PasswordInput value="Password" onChange={(e) => setPassword(e.target.value)} />
 
                         <button
@@ -46,7 +47,6 @@ const Signin = () => {
                                     redirect: false,
                                 });
                                 if (user?.error) {
-                                    console.log(user.error);
                                     alert(user.error);
                                     return;
                                 }

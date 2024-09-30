@@ -43,16 +43,22 @@ export async function SendMail({
     }
 
     var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      host: "smtp.gmail.com",
+      service: "gmail",
+      port: 587,
+      secure: false,
       auth: {
-        user: process.env.MAILTRAP_USER,
-        pass: process.env.MAILTRAP_PASSWORD,
+        user: process.env.USER,
+        pass: process.env.PASSWORD,
       },
     });
 
+    const senderAddress = process.env.USER as string;
     const mailOptions = {
-      from: "hitesh@gmail.com",
+      from: {
+        name: "Bach Eats",
+        address: senderAddress,
+      },
       to: email,
       subject:
         email_type === EmailType.VERIFY
@@ -74,12 +80,10 @@ export async function SendMail({
 
     const mailresponse = await transport.sendMail(mailOptions);
     return mailresponse;
-
-  }
-  catch (e) {
+  } catch (e) {
     return {
       message: "Error sending verification mail",
-      status:500
+      status: 500,
     };
   }
 }

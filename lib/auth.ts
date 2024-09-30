@@ -17,6 +17,7 @@ export const authOptions = {
         password: { label: "password", type: "password", placeholder: "" },
       },
       async authorize(credentials: any): Promise<any> {
+
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
@@ -24,6 +25,9 @@ export const authOptions = {
         });
         if (!user) {
           throw new Error("User not found");
+        }
+        if(!user.isVerified){
+          throw new Error("User not verified. Verify your email through the link sent to your email address");
         }
         const isPasswordValid = await bcrypt.compare(
           credentials.password,
@@ -37,7 +41,8 @@ export const authOptions = {
           id: user.id,
           email: user.email,
           name: user.name,
-          instaUsername:user.instagramUsername
+          instaUsername:user.instagramUsername,
+          isVerified:"true",
         };
       },
     }),
