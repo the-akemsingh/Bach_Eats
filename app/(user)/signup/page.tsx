@@ -39,9 +39,9 @@ const Signup = () => {
 
                     </div>
                     <div className="flex flex-col items-center gap-3 mt-8">
-                        <Input value="Name" placeholder="Bachelors" onChange={(e) => setName(e.target.value)} />
-                        <Input value="Email" placeholder="Bachelors@gmail.com" onChange={(e) => setEmail(e.target.value)} />
-                        <Input value="PhoneNumber" placeholder="9876543210" onChange={(e) => setPhonenumber(e.target.value)} />
+                        <Input type="text" value="Name" placeholder="Bachelors" onChange={(e) => setName(e.target.value)} />
+                        <Input type="text" value="Email" placeholder="Bachelors@gmail.com" onChange={(e) => setEmail(e.target.value)} />
+                        <Input type="text" value="PhoneNumber" placeholder="9876543210" onChange={(e) => setPhonenumber(e.target.value)} />
                         <select
                             className="w-full rounded-lg font-mono p-2 text-gray-700 hover:border-yellow-700 bg-gray-100 border shadow-sm"
                             value={gender}
