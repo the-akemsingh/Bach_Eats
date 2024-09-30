@@ -3,28 +3,17 @@
 import { FaUser } from "react-icons/fa";
 import { calistoga, pacifico } from "@/app/fonts";
 import { useEffect, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { inviteType } from "@/types";
 
 interface InvitePopupProps {
-    invite: Invite;
+    invite: inviteType;
     onClose: () => void;
 }
-interface Invite {
-    id: string;
-    heading: string;
-    pitch: string;
-    note: string | null;
-    slots: number;
-    emptyslots: number;
-    host: {
-        id: string;
-    };
-}
+
 
 export default function InvitePopup({ invite, onClose }: InvitePopupProps) {
-    const session = useSession();
-    const userId = session.data?.user.id as string;
+ 
     const [reqsent, setReqsent] = useState<boolean>(false);
     const Router=useRouter();
 

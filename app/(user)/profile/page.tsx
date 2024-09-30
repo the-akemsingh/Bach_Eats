@@ -6,16 +6,9 @@ import UserInvites from "@/app/actions/fetch-userInvites";
 import Image from "next/image";
 import deleteInvite from "@/app/actions/deleteInvite";
 import { useRouter } from "next/navigation";
+import { inviteType } from "@/types";
 
-interface inviteType {
-  id: string;
-  heading: string;
-  pitch: string;
-  note: string | null;
-  slots: number;
-  timeCreated: Date;
-  hostId: string;
-}
+
 
 export default function UserProfile() {
   const { data: session } = useSession();

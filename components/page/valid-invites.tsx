@@ -4,26 +4,15 @@ import { allValid_Invites } from "@/app/actions/getAll-Invites";
 import { pacifico, poppins } from "@/app/fonts";
 import { useEffect, useState } from "react";
 import InvitePopup from "./invite-popup";
+import { inviteType } from "@/types";
 
-interface InviteType {
-    id: string;
-    heading: string;
-    pitch: string;
-    note: string | null;
-    slots: number;
-    emptyslots:number;
-    host: {
-        id: string;
-    };
-}
-
-const getValidInvites = async (): Promise<InviteType[]> => {
+const getValidInvites = async (): Promise<inviteType[]> => {
     try {
         const res = await allValid_Invites();
         if (res.status === 204) {
             return [];
         }
-        return res.activeInvites as InviteType[];
+        return res.activeInvites as inviteType[];
     } catch (e) {
         alert("Error Occurred");
         return [];
@@ -32,7 +21,7 @@ const getValidInvites = async (): Promise<InviteType[]> => {
 
 export default function ValidInvites() {
     const [selectedInviteId, setSelectedInviteId] = useState<string | null>(null);
-    const [invites, setInvites] = useState<InviteType[] | null>(null);
+    const [invites, setInvites] = useState<inviteType[] | null>(null);
 
     function inviteClickHandler(inviteId: string) {
         setSelectedInviteId(inviteId);

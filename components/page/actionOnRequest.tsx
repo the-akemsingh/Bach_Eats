@@ -5,31 +5,12 @@ import deleteRequest from "@/app/actions/deleteRequest";
 import getUserByID from "@/app/actions/getUserbyID";
 import { useEffect, useState } from "react";
 import isUserReqAccepted from "@/app/actions/isUserReqAccepted";
+import { inviteWithRequestsType, requesterType } from "@/types";
 
-interface requesterType {
-    id: string;
-    name: string;
-    phonenumber: string;
-    gender: string;
-    instagramUsername: string | null;
-    isAccepted: boolean;
-}
-interface inviteType {
-    id: string;
-    heading: string;
-    pitch: string;
-    note: string | null;
-    slots: number;
-    timeCreated: Date;
-    hostId: string;
-    reqReceived: {
-        id: string;
-        inviteId: string;
-        fromId: string;
-    }[];
-}
 
-export default function ActionOnRequest({ selectedInvite, invites }: { selectedInvite: inviteType | null, invites: inviteType[] | null }) {
+
+
+export default function ActionOnRequest({ selectedInvite, invites }: { selectedInvite: inviteWithRequestsType | null, invites: inviteWithRequestsType[] | null }) {
     const [requesters, setRequesters] = useState<requesterType[] | null>(null);
 
     useEffect(() => {
@@ -55,7 +36,7 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
         getRequesterDetails();
     }, [selectedInvite, invites]);
 
-    async function acceptInvite(requester: string, invite: inviteType) {
+    async function acceptInvite(requester: string, invite: inviteWithRequestsType) {
         const res = await AcceptInvite({ requesterId: requester, inviteId: invite.id });
         if (res?.status == 201) {
             alert("invite accepted")
@@ -82,7 +63,7 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
             setRequesters(requesterData);
         }
     }
-    async function deleteInviteRequest(requester: string, invite: inviteType) {
+    async function deleteInviteRequest(requester: string, invite: inviteWithRequestsType) {
         const res = await deleteRequest({ requesterId: requester, inviteId: invite.id });
         if (res?.status == 200) {
             await refetchRequesters();

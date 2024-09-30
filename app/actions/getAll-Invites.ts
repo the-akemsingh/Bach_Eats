@@ -26,11 +26,8 @@ export async function allValid_Invites() {
         note: true,
         slots: true,
         emptyslots:true,
-        host: {
-          select: {
-            id: true,
-          },
-        },
+        hostId: true,
+        timeCreated: true,
       },
     });
 

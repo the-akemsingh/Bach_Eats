@@ -4,27 +4,15 @@ import isReqReceived from "@/app/actions/ReqReceived";
 import { poppins } from "@/app/fonts";
 import ActionOnRequest from "@/components/page/actionOnRequest";
 import ReceivedRequests from "@/components/page/receivedRequestsCard";
+import { inviteWithRequestsType } from "@/types";
 import { useSession } from "next-auth/react";
 import {  useEffect, useState } from "react";
 
-interface inviteType {
-    id: string;
-    heading: string;
-    pitch: string;
-    note: string | null;
-    slots: number;
-    timeCreated: Date;
-    hostId: string;
-    reqReceived: {
-        id: string;
-        inviteId: string;
-        fromId: string;
-    }[];
-}
+
 
 export default function ReqReceived() {
-    const [invites, setInvites] = useState<inviteType[] | null>(null);
-    const [selectedInvite, setSelectedInvite] = useState<inviteType | null>(null);
+    const [invites, setInvites] = useState<inviteWithRequestsType[] | null>(null);
+    const [selectedInvite, setSelectedInvite] = useState<inviteWithRequestsType | null>(null);
     if (invites?.length === 0) {
         return (
             <div className={`text-5xl pt-52 text-gray-500 text-center ${poppins.className} `}>

@@ -7,23 +7,10 @@ import myacceptedRequests from "@/app/actions/myacceptedRequests";
 import { poppins } from "@/app/fonts";
 import getInvitebyId from "@/app/actions/getInviteByID";
 import { useRouter } from "next/navigation";
+import { acceptedInvites, inviteType } from "@/types";
 
-interface acceptedInvites {
-    id: string;
-    inviteId: string;
-    guestId: string;
-}
 
-interface inviteType {
-    id: string;
-    heading: string;
-    pitch: string;
-    note: string | null;
-    slots: number;
-    emptyslots: number;
-    timeCreated: Date;
-    hostId: string;
-}
+
 
 export default function AcceptedInvitesNotification() {
     const session = useSession();

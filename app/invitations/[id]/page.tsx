@@ -9,6 +9,7 @@ import { FaUser } from "react-icons/fa";
 import Image from "next/image";
 import getGuestList from "@/app/actions/getGuestList";
 import deleteGuest from "@/app/actions/deleteGuest";
+import { inviteType, userType } from "@/types";
 
 
 interface InviteDetailsProps {
@@ -16,31 +17,15 @@ interface InviteDetailsProps {
         id: string;
     };
 }
-interface invite {
-    id: string;
-    heading: string;
-    pitch: string;
-    note: string | null;
-    slots: number;
-    emptyslots: number;
-    timeCreated: Date;
-    hostId: string;
-}
 
-interface userType {
 
-    id: string;
-    name: string;
-    phonenumber: string;
-    gender: string;
-    instagramUsername: string | null;
-}
+
 
 export default function InviteDetails({ params }: InviteDetailsProps) {
     const { id } = params;
     const session = useSession();
     const userId = session.data?.user.id;
-    const [invite, setInvite] = useState<invite | null>(null);
+    const [invite, setInvite] = useState<inviteType | null>(null);
     const [requestsent, setRequestsent] = useState<boolean>(false);
     const [showPopup, setShowPopup] = useState<boolean>(false);
     const [host, setHost] = useState<userType | null>(null);
@@ -53,7 +38,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
     useEffect(() => {
         async function getInvite() {
             const res = await getInvitebyId(id);
-            setInvite(res.invite as invite);
+            setInvite(res.invite as inviteType);
         }
         getInvite();
     }, [id]);
