@@ -3,7 +3,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export function Lamp() {
+export function Lamp(
+  { children }: { children: React.ReactNode }
+) {
   return (
     <LampContainer>
       <motion.h1
@@ -14,9 +16,10 @@ export function Lamp() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+        className=" mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
       >
-        Explore Nearby Invites <br /> and Join a Meal Today!
+        Explore Nearby Invites <br /> and Join a Meal Today! <br />
+        {children}
       </motion.h1>
     </LampContainer>
   );
@@ -98,6 +101,7 @@ export const LampContainer = ({
 
       <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">
         {children}
+
       </div>
     </div>
   );

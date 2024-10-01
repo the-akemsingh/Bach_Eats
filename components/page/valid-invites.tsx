@@ -1,31 +1,35 @@
 "use client";
 
 import { allValid_Invites } from "@/app/actions/getAll-Invites";
-import { pacifico, poppins } from "@/app/fonts";
+import { merriweather, pacifico, poppins } from "@/app/fonts";
 import { useEffect, useState } from "react";
 import InvitePopup from "./invite-popup";
 import { inviteType } from "@/types";
 
-const getValidInvites = async (): Promise<inviteType[]> => {
-    try {
-        const res = await allValid_Invites();
-        if (res.status === 204) {
-            return [];
-        }
-        return res.activeInvites as inviteType[];
-    } catch (e) {
-        alert("Error Occurred");
-        return [];
-    }
+const formatDate = (dateString: Date) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = String(date.getFullYear()).slice(2);
+    return `${day}.${month}.${year}`;
 };
 
-export default function ValidInvites() {
-    const [selectedInviteId, setSelectedInviteId] = useState<string | null>(null);
+const ValidInvites = () => {
+    const [selectedInvite, setSelectedInvite] = useState<inviteType | null>(null);
     const [invites, setInvites] = useState<inviteType[] | null>(null);
 
-    function inviteClickHandler(inviteId: string) {
-        setSelectedInviteId(inviteId);
-    }
+    const getValidInvites = async (): Promise<inviteType[]> => {
+        try {
+            const res = await allValid_Invites();
+            if (res.status === 204) {
+                return [];
+            }
+            return res.activeInvites as inviteType[];
+        } catch (e) {
+            alert("Error Occurred");
+            return [];
+        }
+    };
 
     useEffect(() => {
         const fetchInvites = async () => {
@@ -36,6 +40,10 @@ export default function ValidInvites() {
         fetchInvites();
     }, []);
 
+    function inviteClickHandler(invite: inviteType) {
+        setSelectedInvite(invite);
+    }
+
     return (
         <div className="w-full max-w-screen-lg mx-auto relative">
             {invites && invites.length > 0 ? (
@@ -45,9 +53,12 @@ export default function ValidInvites() {
                             <div
                                 key={invite.id}
                                 className={`flex flex-col p-6 bg-gray-100 shadow-lg rounded-xl transition-transform transform cursor-pointer
-                                            ${selectedInviteId === invite.id ? "relative z-20 scale-105" : ""}`}
-                                onClick={() => inviteClickHandler(invite.id)}
+                                            ${selectedInvite === invite ? "relative z-20 scale-105" : ""}`}
+                                onClick={() => inviteClickHandler(invite)}
                             >
+                                <span className={`mb-2 ${merriweather.className} `}>
+                                    {formatDate(invite.timeCreated)}
+                                </span>
                                 <h2 className={`text-2xl mb-2 ${pacifico.className}`}>
                                     {invite.heading}
                                 </h2>
@@ -57,24 +68,24 @@ export default function ValidInvites() {
                             </div>
                         ))}
                     </div>
-                    {selectedInviteId && (
+                    {selectedInvite && (
                         <div className="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm z-10"></div>
                     )}
-
                 </div>
             ) : (
-                <div className={`text-5xl mt-32 text-gray-500 text-center ${poppins.className} `}>
+                <div className={`text-5xl mt-32 text-gray-500 text-center ${poppins.className}`}>
                     No active invites
-                    <div className={`${pacifico.className} text-lg mt-6 `} >Guess no one cooked today</div>
+                    <div className={`${pacifico.className} text-lg mt-6`}>Guess no one cooked today</div>
                 </div>
             )}
-
-            {selectedInviteId && (
+            {selectedInvite && (
                 <InvitePopup
-                    invite={invites!.find(invite => invite.id === selectedInviteId)!}
-                    onClose={() => setSelectedInviteId(null)}
+                    invite={selectedInvite}
+                    onClose={() => setSelectedInvite(null)}
                 />
             )}
         </div>
     );
-}
+};
+
+export default ValidInvites;
