@@ -70,10 +70,7 @@ export async function SendMail({
         email_type === EmailType.VERIFY
           ? "verify your email"
           : "reset your password"
-      }
-        or copy and paste the link below in your browser. <br> ${
-          process.env.URL
-        }/verifyemail?token=${token}
+      }<br>
         *NOTE :  Link is only valid for one hour
         </p>`,
     };
