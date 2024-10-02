@@ -3,7 +3,6 @@ import "./globals.css";
 import { Providers } from "./providers";
 import NavbarProvider from "./NavbarProvider";
 import Logo from "@/components/ui/logo";
-import Footer from "@/components/page/footer";
 
 
 
@@ -24,7 +23,6 @@ export default function RootLayout({
           <Logo/>
           <NavbarProvider />
           {children}
-          <Footer/>
         </Providers>
       </body>
     </html>

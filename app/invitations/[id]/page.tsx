@@ -11,6 +11,7 @@ import getGuestList from "@/app/actions/getGuestList";
 import deleteGuest from "@/app/actions/deleteGuest";
 import { inviteType, userType } from "@/types";
 import isUserReqAccepted from "@/app/actions/isUserReqAccepted";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 interface InviteDetailsProps {
@@ -82,10 +83,10 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
                 setShowPopup(true);
             }
             if (res.status === 200) {
-                alert("Request already sent");
+                toast("Request already sent");
             }
         } catch (e) {
-            alert("Error occurred while sending request");
+            toast.error("Error sending request");
         }
     }
 
@@ -97,7 +98,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
             }
         }
         catch (e) {
-            alert("Error occurred while fetching guest list");
+            toast.error("Error fetching guest list");
         }
     }
 
@@ -110,10 +111,10 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
             const res = await deleteGuest({ inviteId: inviteId, guestId: guestId });
             if (res.status === 200) {
                 await fetchGuestList();
-                alert("Guest Deleted Successfully");
+                toast.success("Deleted Successfully");
             }
         } catch (e) {
-            alert("Error occurred while sending request");
+            toast.error("Error Deleting");
         }
     }
 
@@ -184,7 +185,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
                                             </button>
                                         </div>
                                     </div>
-                                    
+
                                 ) : (
                                     <div>
                                         {(invite.slots) >= invite.emptyslots && invite.emptyslots > 0 ? (
@@ -272,6 +273,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
                     </div>
                 </div>
             )}
+            <Toaster />
         </div>
     );
 }

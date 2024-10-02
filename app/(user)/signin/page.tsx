@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import { Input, PasswordInput } from "@/components/ui/input";
 import Link from "next/link";
 import { jersey_10 } from "@/app/fonts";
+import toast, { Toaster } from 'react-hot-toast';
+
+
 
 const Signin = () => {
     const [email, setEmail] = useState("");
@@ -39,7 +42,7 @@ const Signin = () => {
                         <PasswordInput value="Password" onChange={(e) => setPassword(e.target.value)} />
 
                         <button
-                            className="w-full mt-2 bg-white p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl"
+                            className="w-full mt-2 bg-red-950 text-white p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl"
                             onClick={async () => {
                                 const user = await signIn("credentials", {
                                     email,
@@ -47,18 +50,19 @@ const Signin = () => {
                                     redirect: false,
                                 });
                                 if (user?.error) {
-                                    alert(user.error);
+                                    toast.error(user.error);
                                     return;
                                 }
+                                toast.success("Signed in successfully");
                                 Router.push("/");
                             }}
                         >
                             Signin
                         </button>
 
-                        <button
+                        {/* <button
                             className="w-full flex items-center justify-center gap-2 p-2 bg-red-950 text-white rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl"
-                            onClick={() => signIn("google")}
+                            onClick={() =>signIn("google")}
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +79,7 @@ const Signin = () => {
                                 <path fill="#4285f4" d="M29.25,15v1L27,19.5H16.5V14H28.25A1,1,0,0,1,29.25,15Z"></path>
                             </svg>
                             <span>Sign in with Google</span>
-                        </button>
+                        </button> */}
 
                         <hr className="border-black w-full mt-2 mb-2" />
                         <span>
@@ -90,7 +94,9 @@ const Signin = () => {
                     </div>
                 </div>
             </div>
+            <Toaster />
         </div>
+
     );
 };
 

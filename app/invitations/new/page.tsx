@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { CreateNewInvite } from "@/app/actions/CreateInvite";
 import { calistoga, pacifico, poppins } from "@/app/fonts";
 import { Input } from "@/components/ui/input";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function NewInvite() {
     const [heading, setHeading] = useState('');
@@ -15,13 +16,14 @@ export default function NewInvite() {
     async function handleCreateInvite() {
         try {
             const res = await CreateNewInvite({ heading, pitch, note, slots });
-            alert(res.message);
             if (res.status === 201) {
+                toast.success("Invite created successfully");
                 Router.push(`/invitations/${res.id}`);
+            }else{
+                toast.error(res.message);
             }
         } catch (e) {
-            console.log(e);
-            alert("Error occurred while creating invite");
+            toast.error("Error occurred while creating invite");
         }
     }
 
@@ -79,6 +81,7 @@ export default function NewInvite() {
                     </button>
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 }

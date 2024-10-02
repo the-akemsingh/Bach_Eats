@@ -6,6 +6,7 @@ import { FlipWords } from "@/components/ui/flip-words";
 import { Lamp } from "@/components/ui/lamp";
 import { ActivitiesCard } from "@/components/page/activities";
 import Link from "next/link";
+import Footer from "@/components/page/footer";
 
 
 export default function Home() {
@@ -17,7 +18,7 @@ export default function Home() {
       <div className=" mb-14 mt-20 bg-transparent top-10  flex flex-col justify-center">
         <div className={`
           mt-44 left-24 relative
-          flex flex-col text-6xl  pt-5  pb-5  ${calistoga.className}`} >
+          flex flex-col text-6xl  pt-5  pb-5 font-extrabold`} >
 
           <FlipWords className="text-red-400" words={["Not in mood to cook today?", "Feeling lonely?", "Out of groceries?", "Or want to share a meal?"]}></FlipWords>
 
@@ -85,6 +86,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }

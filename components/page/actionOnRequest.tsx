@@ -6,6 +6,7 @@ import getUserByID from "@/app/actions/getUserbyID";
 import { useEffect, useState } from "react";
 import isUserReqAccepted from "@/app/actions/isUserReqAccepted";
 import { inviteWithRequestsType, requesterType } from "@/types";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
@@ -37,13 +38,11 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
     async function acceptInvite(requester: string, invite: inviteWithRequestsType) {
         const res = await AcceptInvite({ requesterId: requester, inviteId: invite.id });
         if (res?.status == 201) {
-            alert("invite accepted")
+            await refetchRequesters();
+            toast.success("Invite accepted")
         }
-        if (res?.status == 400) {
-            alert(res.message)
-        }
-        if (res?.status == 500) {
-            alert("Error occured")
+        else {
+            toast.error("Error occured")
         }
     }
     async function refetchRequesters() {
@@ -64,11 +63,11 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
     async function deleteInviteRequest(requester: string, invite: inviteWithRequestsType) {
         const res = await deleteRequest({ requesterId: requester, inviteId: invite.id });
         if (res?.status == 200) {
+            toast.success("Request deleted")
             await refetchRequesters();
-            alert("Request deleted")
         }
         if (res?.status == 500) {
-            alert("Error occured")
+            toast.error("Error occured")
         }
     }
 
@@ -76,7 +75,7 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
         {selectedInvite && requesters && requesters.length > 0 && (
             <div>
                 {requesters.map((requester: requesterType) => (
-                    <div  key={requester.id} className="bg-gray-100 p-4 mb-2 rounded-lg shadow">
+                    <div key={requester.id} className="bg-gray-100 p-4 mb-2 rounded-lg shadow">
 
                         <div className="font-bold">{requester.name}</div>
                         <div>Gender: {requester.gender}</div>
@@ -97,5 +96,7 @@ export default function ActionOnRequest({ selectedInvite, invites }: { selectedI
                 ))}
             </div>
         )}
+        <Toaster />
+
     </div>
 }

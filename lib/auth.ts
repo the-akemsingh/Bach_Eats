@@ -6,10 +6,10 @@ import bcrypt from "bcrypt";
 
 export const authOptions = {
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID || "",
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    // }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -17,7 +17,6 @@ export const authOptions = {
         password: { label: "password", type: "password", placeholder: "" },
       },
       async authorize(credentials: any): Promise<any> {
-
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
@@ -26,8 +25,10 @@ export const authOptions = {
         if (!user) {
           throw new Error("User not found");
         }
-        if(!user.isVerified){
-          throw new Error("User not verified. Verify your email through the link sent to your email address");
+        if (!user.isVerified) {
+          throw new Error(
+            "User not verified. Verify your email through the link sent to your email address"
+          );
         }
         const isPasswordValid = await bcrypt.compare(
           credentials.password,
@@ -41,8 +42,8 @@ export const authOptions = {
           id: user.id,
           email: user.email,
           name: user.name,
-          instaUsername:user.instagramUsername,
-          isVerified:"true",
+          instaUsername: user.instagramUsername,
+          isVerified: "true",
         };
       },
     }),
@@ -56,6 +57,5 @@ export const authOptions = {
       session.user.id = token.sub;
       return session;
     },
-
   },
 };

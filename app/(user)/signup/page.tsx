@@ -7,6 +7,7 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { jersey_10 } from "@/app/fonts";
 import { signup } from "@/app/actions/Signup";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Signup = () => {
     const [email, setEmail] = useState("");
@@ -60,7 +61,7 @@ const Signup = () => {
                         ></PasswordInput>
 
                         <button
-                            className="w-full mt-2 bg-white p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl"
+                            className="w-full mt-2 bg-red-950 text-white p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl"
                             onClick={async () => {
                                 const user = await signup({
                                     name,
@@ -70,8 +71,9 @@ const Signup = () => {
                                     gender,
                                 });
                                 if (user.status != 201) {
-                                    alert(user.message);
+                                    toast.error(user.message);
                                 } else {
+                                    toast.success("Signed up successfully");
                                     Router.push("/signin");
                                 }
                             }}
@@ -79,7 +81,7 @@ const Signup = () => {
                             Signup
                         </button>
 
-                        <button
+                        {/* <button
                             className="w-full flex items-center justify-center gap-2 p-2 bg-red-950 text-white rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl"
                             onClick={() => signIn("google")}
                         >
@@ -113,7 +115,7 @@ const Signup = () => {
                                 ></path>
                             </svg>
                             <span>Sign up with Google</span>
-                        </button>
+                        </button> */}
                         <hr className="border-black w-full mt-2 mb-2" />
                         <span>
                             Already have an account?{" "}
@@ -127,6 +129,7 @@ const Signup = () => {
                     </div>
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 };
