@@ -8,7 +8,7 @@ const Input = ({ value, placeholder, onChange, type }: {
     onChange: (e: any) => void
 }) => {
     return (
-        <div className="w-full max-w-xs bg-gray-100 rounded-lg font-mono">
+        <div className="w-full max-w-xs text-lg bg-gray-100 rounded-lg font-mono">
             <label className="block text-gray-700 text-sm font-bold mb-2">
                 {value}
             </label>

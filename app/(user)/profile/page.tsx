@@ -70,6 +70,7 @@ export default function UserProfile() {
 
   return (
     <div className="flex flex-col items-center mb-10 pt-10 bg-white min-h-screen">
+      {/* Tab Navigation */}
       <div className="mt-16 flex space-x-8">
         <button
           className={`text-lg font-semibold p-2 ${activeTab === "profile"
@@ -91,9 +92,10 @@ export default function UserProfile() {
         </button>
       </div>
 
+      {/* Profile Info */}
       {activeTab === "profile" && (
         <div className="relative top-10 flex flex-col items-center p-8 shadow-xl rounded-2xl bg-gray-100 w-full max-w-2xl">
-          <p className={`text-xl ${pacifico.className} text-gray-600 mb-6`}>
+          <p className={`text-xl ${pacifico.className} text-gray-600 mb-6 text-center`}>
             Here’s your profile information.
           </p>
           <div className="flex flex-col gap-4 w-full items-center">
@@ -102,12 +104,11 @@ export default function UserProfile() {
             </div>
             <div className="p-4 border-b border-gray-300 w-full flex justify-between">
               <p className="text-lg font-semibold">Email: {userEmail}</p>
-              <p className="text-green-600 text-sm">✅ Verified</p>
             </div>
             {instaUsername ? (
               <div className="p-4 border-b border-gray-300 w-full">
-                <p className="text-lg font-semibold">
-                  <Image src={'/images/instagramIcon.svg'} height={25} width={25} alt="Instagram" />:{" "}
+                <p className="text-lg font-semibold flex gap-4">
+                  <Image src={'/images/instagramIcon.svg'} height={20} width={20} alt="Instagram" />:{" "}
                   <a
                     className="text-blue-500"
                     href={`https://www.instagram.com/${instaUsername}`}
@@ -121,7 +122,7 @@ export default function UserProfile() {
             ) : (
               <div className="p-4 border-b border-gray-300 w-full">
                 <p className="text-lg font-semibold flex gap-4">
-                  <Image src={'/images/instagramIcon.svg'} height={25} width={25} alt="Instagram" /> :{" "}
+                  <Image src={'/images/instagramIcon.svg'} height={20} width={20} alt="Instagram" />:{" "}
                   <span className="text-blue-500">Not Linked</span>
                 </p>
               </div>
@@ -130,6 +131,7 @@ export default function UserProfile() {
         </div>
       )}
 
+      {/* Posted Invites */}
       {activeTab === "invites" && (
         <div className="relative top-10 flex flex-col items-center p-8 shadow-xl rounded-2xl bg-gray-100 w-full max-w-2xl">
           <div className="flex flex-col gap-4 w-full">
@@ -165,6 +167,7 @@ export default function UserProfile() {
         </div>
       )}
 
+      {/* Delete Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
           <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
