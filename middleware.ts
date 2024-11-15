@@ -4,19 +4,19 @@ import { getToken } from 'next-auth/jwt';
 
 export async function middleware(request: NextRequest) {
   // Retrieve the session token using `getToken`
-  const session = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
-  const path=request.nextUrl.pathname;
-  const isPublicPath=path==='/signin' || path==='/signup' || path==='/verifymail';
+  // const session = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+  // const path=request.nextUrl.pathname;
+  // const isPublicPath=path==='/signin' || path==='/signup' || path==='/verifymail';
 
-  if(isPublicPath && session){
-    return NextResponse.redirect(new URL('/', request.url));
-  }
-  if (request.nextUrl.pathname.startsWith('/profile') && !session) {
-    return NextResponse.redirect(new URL('/', request.url));
-  }
-  if (request.nextUrl.pathname.startsWith('/invitations') && !session) {
-    return NextResponse.redirect(new URL('/', request.url));
-  }
+  // if(isPublicPath && session){
+  //   return NextResponse.redirect(new URL('/', request.url));
+  // }
+  // if (request.nextUrl.pathname.startsWith('/profile') && !session) {
+  //   return NextResponse.redirect(new URL('/', request.url));
+  // }
+  // if (request.nextUrl.pathname.startsWith('/invitations') && !session) {
+  //   return NextResponse.redirect(new URL('/', request.url));
+  // }
 
   return NextResponse.next();
 }

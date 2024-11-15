@@ -1,6 +1,7 @@
 "use client";
+
 import { useSession } from "next-auth/react";
-import { pacifico } from "@/app/fonts";
+import { Poppins } from 'next/font/google';
 import { useEffect, useState } from "react";
 import UserInvites from "@/app/actions/fetch-userInvites";
 import Image from "next/image";
@@ -8,6 +9,10 @@ import deleteInvite from "@/app/actions/deleteInvite";
 import { useRouter } from "next/navigation";
 import { inviteType } from "@/types";
 import toast, { Toaster } from 'react-hot-toast';
+import { motion, AnimatePresence } from "framer-motion";
+import { Instagram, Mail, User, Trash2 } from 'lucide-react';
+
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600', '700'] });
 
 export default function UserProfile() {
   const { data: session } = useSession();
@@ -69,128 +74,155 @@ export default function UserProfile() {
   };
 
   return (
-    <div className="flex flex-col items-center mb-10 pt-10 bg-white min-h-screen">
+    <div className={`flex flex-col items-center min-h-screen bg-gradient-to-b from-pink-100 to-white dark:from-gray-900 dark:to-gray-800 pt-24 px-4 ${poppins.className}`}>
       {/* Tab Navigation */}
-      <div className="mt-16 flex space-x-8">
+      <div className="mb-8 flex space-x-4">
         <button
-          className={`text-lg font-semibold p-2 ${activeTab === "profile"
-            ? "text-red-500 border-b-2 border-red-500"
-            : "text-gray-500"
-            }`}
+          className={`text-lg font-semibold p-2 rounded-t-lg transition-colors ${
+            activeTab === "profile"
+              ? "bg-white dark:bg-gray-800 text-pink-600 dark:text-pink-400"
+              : "bg-pink-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+          }`}
           onClick={() => setActiveTab("profile")}
         >
           Profile Info
         </button>
         <button
-          className={`text-lg font-semibold p-2 ${activeTab === "invites"
-            ? "text-red-500 border-b-2 border-red-500"
-            : "text-gray-500"
-            }`}
+          className={`text-lg font-semibold p-2 rounded-t-lg transition-colors ${
+            activeTab === "invites"
+              ? "bg-white dark:bg-gray-800 text-pink-600 dark:text-pink-400"
+              : "bg-pink-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+          }`}
           onClick={() => setActiveTab("invites")}
         >
           Posted Invites
         </button>
       </div>
 
-      {/* Profile Info */}
-      {activeTab === "profile" && (
-        <div className="relative top-10 flex flex-col items-center p-8 shadow-xl rounded-2xl bg-gray-100 w-full max-w-2xl">
-          <p className={`text-xl ${pacifico.className} text-gray-600 mb-6 text-center`}>
-            Here’s your profile information.
-          </p>
-          <div className="flex flex-col gap-4 w-full items-center">
-            <div className="p-4 border-b border-gray-300 flex justify-between w-full">
-              <p className="text-lg font-semibold">Name: {userName}</p>
-            </div>
-            <div className="p-4 border-b border-gray-300 w-full flex justify-between">
-              <p className="text-lg font-semibold">Email: {userEmail}</p>
-            </div>
-            {instaUsername ? (
-              <div className="p-4 border-b border-gray-300 w-full">
-                <p className="text-lg font-semibold flex gap-4">
-                  <Image src={'/images/instagramIcon.svg'} height={20} width={20} alt="Instagram" />:{" "}
+      <AnimatePresence mode="wait">
+        {activeTab === "profile" && (
+          <motion.div
+            key="profile"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8"
+          >
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">Your Profile</h2>
+            <div className="space-y-6">
+              <div className="flex items-center space-x-4">
+                <User className="w-6 h-6 text-pink-600 dark:text-pink-400" />
+                <p className="text-lg text-gray-700 dark:text-gray-300">{userName}</p>
+              </div>
+              <div className="flex items-center space-x-4">
+                <Mail className="w-6 h-6 text-pink-600 dark:text-pink-400" />
+                <p className="text-lg text-gray-700 dark:text-gray-300">{userEmail}</p>
+              </div>
+              <div className="flex items-center space-x-4">
+                <Instagram className="w-6 h-6 text-pink-600 dark:text-pink-400" />
+                {instaUsername ? (
                   <a
-                    className="text-blue-500"
+                    className="text-lg text-blue-500 hover:underline"
                     href={`https://www.instagram.com/${instaUsername}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     @{instaUsername}
                   </a>
-                </p>
+                ) : (
+                  <span className="text-lg text-gray-500 dark:text-gray-400">Not Linked</span>
+                )}
               </div>
-            ) : (
-              <div className="p-4 border-b border-gray-300 w-full">
-                <p className="text-lg font-semibold flex gap-4">
-                  <Image src={'/images/instagramIcon.svg'} height={20} width={20} alt="Instagram" />:{" "}
-                  <span className="text-blue-500">Not Linked</span>
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+            </div>
+          </motion.div>
+        )}
 
-      {/* Posted Invites */}
-      {activeTab === "invites" && (
-        <div className="relative top-10 flex flex-col items-center p-8 shadow-xl rounded-2xl bg-gray-100 w-full max-w-2xl">
-          <div className="flex flex-col gap-4 w-full">
+        {activeTab === "invites" && (
+          <motion.div
+            key="invites"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8"
+          >
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">Your Posted Invites</h2>
             {invites ? (
               invites.length > 0 ? (
-                invites.map((invite) => (
-                  <div
-                    key={invite.id}
-                    className="p-4 border border-gray-300 rounded-lg shadow-md bg-gray-50 cursor-pointer"
-                  >
-                    <div onClick={() => Router.push(`/invitations/${invite.id}`)}>
-                      <h3 className="text-xl font-semibold">{invite.heading}</h3>
-                      <p className="text-gray-500 text-sm">
-                        Posted: {formatDate(invite.timeCreated.toISOString())}
-                      </p>
-                    </div>
-                    <button
-                      className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
-                      onClick={() => {
-                        setShowDeleteModal(true);
-                        setInviteToDelete(invite.id);
-                      }}
+                <div className="space-y-4">
+                  {invites.map((invite) => (
+                    <motion.div
+                      key={invite.id}
+                      className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md bg-gray-50 dark:bg-gray-700 hover:shadow-lg transition-shadow"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      Delete this Invite
-                    </button>
-                  </div>
-                ))
+                      <div onClick={() => Router.push(`/invitations/${invite.id}`)} className="cursor-pointer">
+                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">{invite.heading}</h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          Posted: {formatDate(invite.timeCreated.toISOString())}
+                        </p>
+                      </div>
+                      <button
+                        className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center space-x-2"
+                        onClick={() => {
+                          setShowDeleteModal(true);
+                          setInviteToDelete(invite.id);
+                        }}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        <span>Delete Invite</span>
+                      </button>
+                    </motion.div>
+                  ))}
+                </div>
               ) : (
-                <div className="text-lg font-semibold p-4">No Invites Posted</div>
+                <p className="text-lg text-center text-gray-600 dark:text-gray-400">No Invites Posted</p>
               )
-            ) : null}
-          </div>
-        </div>
-      )}
+            ) : (
+              <p className="text-lg text-center text-gray-600 dark:text-gray-400">Loading invites...</p>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Delete Modal */}
-      {showDeleteModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
-            <h2 className="text-lg font-semibold text-center mb-4">
-              Are you sure you want to delete this invite?
-            </h2>
-            <div className="flex justify-around">
-              <button
-                className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-400"
-                onClick={() => setShowDeleteModal(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
-                onClick={() => inviteToDelete && inviteDeleteHandler(inviteToDelete)}
-              >
-                Yes, Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {showDeleteModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          >
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-sm w-full"
+            >
+              <h2 className="text-xl font-semibold text-gray-800 dark:text-white text-center mb-4">
+                Are you sure you want to delete this invite?
+              </h2>
+              <div className="flex justify-around">
+                <button
+                  className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                  onClick={() => setShowDeleteModal(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                  onClick={() => inviteToDelete && inviteDeleteHandler(inviteToDelete)}
+                >
+                  Yes, Delete
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Toaster />
     </div>

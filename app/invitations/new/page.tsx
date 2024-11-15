@@ -1,10 +1,14 @@
 "use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CreateNewInvite } from "@/app/actions/CreateInvite";
-import { calistoga, pacifico, poppins } from "@/app/fonts";
+import { Poppins } from 'next/font/google';
 import { Input } from "@/components/ui/input";
 import toast, { Toaster } from "react-hot-toast";
+import { motion } from "framer-motion";
+
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600', '700'] });
 
 export default function NewInvite() {
     const [heading, setHeading] = useState("");
@@ -28,67 +32,72 @@ export default function NewInvite() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col items-center bg-white p-4">
-            <div className="relative top-20 sm:top-32 flex flex-col items-center p-6 sm:p-10 shadow-xl rounded-2xl bg-gray-100 w-full max-w-2xl lg:max-w-3xl">
-                <h1
-                    className={`text-3xl sm:text-5xl font-bold ${poppins.className} mb-4 sm:mb-6 text-center`}
-                >
+        <div className={`min-h-screen flex flex-col items-center bg-[#1a1a1a] p-4 pt-24 ${poppins.className}`}>
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="w-full max-w-2xl p-8 bg-[#1f1f1f] rounded-2xl shadow-xl"
+            >
+                <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-center text-white">
                     Create a Proposal
                 </h1>
-                <p
-                    className={`text-base sm:text-lg text-gray-600 mb-4 sm:mb-8 text-center ${pacifico.className}`}
-                >
+                <p className="text-base text-gray-300 mb-6 text-center">
                     This proposal will be visible to everyone. Make it count!
                 </p>
-                <p
-                    className={`text-sm sm:text-lg text-gray-600 mb-6 sm:mb-8 text-center ${poppins.className}`}
-                >
+                <p className="text-sm text-gray-400 mb-8 text-center">
                     *validity of the proposal is 3 hours <br />
                     your Instagram will be visible to everyone
                 </p>
 
-                <div className="flex flex-col gap-4 sm:gap-6 w-full">
+                <div className="space-y-6">
                     <Input
-                        value="Heading"
+                        value={heading}
                         type="text"
                         placeholder="Have a name for your invite?"
                         onChange={(e) => setHeading(e.target.value)}
+                        className="w-full p-3 border border-gray-700 rounded-lg bg-[#2a2a2a] text-white placeholder-gray-400"
                     />
 
-                    <div className="flex flex-col gap-2">
-                        <label className="text-base sm:text-lg font-semibold text-gray-700">
+                    <div className="space-y-2">
+                        <label className="text-base font-semibold text-gray-300">
                             Pitch Your Proposal
                         </label>
                         <textarea
-                            className="w-full p-3 sm:p-4 border border-gray-300 rounded-lg shadow-sm text-sm sm:text-base text-black resize-none focus:outline-blue-300 focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-3 border border-gray-700 rounded-lg bg-[#2a2a2a] text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-pink-500"
                             placeholder="Explain what this invite is about, make it enticing!"
-                            rows={4} // Adjusted height for smaller screens
+                            rows={4}
+                            value={pitch}
                             onChange={(e) => setPitch(e.target.value)}
                         />
                     </div>
 
                     <Input
-                        value="Note"
+                        value={note}
                         type="text"
                         placeholder="Any important notes to mention?"
                         onChange={(e) => setNote(e.target.value)}
+                        className="w-full p-3 border border-gray-700 rounded-lg bg-[#2a2a2a] text-white placeholder-gray-400"
                     />
 
                     <Input
-                        value="Slots"
+                        value={slots.toString()}
                         type="number"
                         placeholder="How many people do you expect?"
-                        onChange={(e) => setSlots(Number(e.target.value))} // Ensures number value
+                        onChange={(e) => setSlots(Number(e.target.value))}
+                        className="w-full p-3 border border-gray-700 rounded-lg bg-[#2a2a2a] text-white placeholder-gray-400 [&::-webkit-inner-spin-button]:appearance-none"
                     />
 
-                    <button
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         onClick={handleCreateInvite}
-                        className="mt-4 transition-transform transform bg-red-500 text-white rounded-lg p-3 w-full hover:scale-105 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                        className="w-full p-3 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50 transition-colors"
                     >
                         Create Invite
-                    </button>
+                    </motion.button>
                 </div>
-            </div>
+            </motion.div>
             <Toaster />
         </div>
     );
