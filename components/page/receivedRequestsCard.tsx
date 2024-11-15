@@ -1,32 +1,38 @@
-"use client";
+"use client"
 
-import { inviteWithRequestsType } from "@/types";
+import { motion } from "framer-motion"
+import { inviteWithRequestsType } from "@/types"
 
-export default function ReceivedRequests({ setSelectedInvite, invites }: {
-    setSelectedInvite: (invite: inviteWithRequestsType) => void,
-    invites: inviteWithRequestsType[] | null
+export default function ReceivedRequests({ 
+  setSelectedInvite, 
+  invites 
+}: {
+  setSelectedInvite: (invite: inviteWithRequestsType) => void,
+  invites: inviteWithRequestsType[] | null
 }) {
-    
+  function inviteClickHandler(invite: inviteWithRequestsType) {
+    setSelectedInvite(invite)
+  }
 
-    function inviteClickHandler(invite: inviteWithRequestsType) {
-        setSelectedInvite(invite);
-    }
-
-    return (
-        <div className="col-span-1 flex flex-col mt-40 gap-2 p-6 overflow-y-auto">
-            {invites && invites.map((invite: inviteWithRequestsType) => (
-                <div
-                    key={invite.id}
-                    className="relative bg-white shadow-lg rounded-lg p-4 flex flex-col hover:bg-red-200 transition-colors duration-300 cursor-pointer"
-                    onClick={() => inviteClickHandler(invite)}
-                >
-                    <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">
-                        {invite.reqReceived.length}
-                    </div>
-                    <div className="text-lg font-bold text-gray-900">{invite.heading}</div>
-                    <div className="mt-4 text-gray-500">Slots: {invite.slots}</div>
-                </div>
-            ))}
-        </div>
-    )
+  return (
+    <div className="h-[calc(100vh-200px)] overflow-hidden">
+      <div className="h-full overflow-y-auto pr-4 space-y-2 scrollbar-hide">
+        {invites && invites.map((invite: inviteWithRequestsType) => (
+          <motion.div
+            key={invite.id}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="bg-gray-800 rounded-lg p-4 cursor-pointer relative overflow-hidden"
+            onClick={() => inviteClickHandler(invite)}
+          >
+            <div className="absolute top-0 right-0 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
+              {invite.reqReceived.length} Request{invite.reqReceived.length !== 1 ? 's' : ''}
+            </div>
+            <h3 className="text-lg font-semibold text-white mb-2">{invite.heading}</h3>
+            <p className="text-sm text-gray-400">Slots: {invite.slots}</p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  )
 }

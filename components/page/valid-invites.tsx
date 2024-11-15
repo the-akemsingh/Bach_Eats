@@ -1,91 +1,98 @@
-"use client";
+"use client"
 
-import { allValid_Invites } from "@/app/actions/getAll-Invites";
-import { merriweather, pacifico, poppins } from "@/app/fonts";
-import { useEffect, useState } from "react";
-import InvitePopup from "./invite-popup";
-import { inviteType } from "@/types";
+import { useEffect, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Calendar, Users } from 'lucide-react'
+import { allValid_Invites } from "@/app/actions/getAll-Invites"
+import { inviteType } from "@/types"
+import InvitePopup from "./invite-popup"
 
 const formatDate = (dateString: Date) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = String(date.getFullYear()).slice(2);
-    return `${day}.${month}.${year}`;
-};
+  const date = new Date(dateString)
+  return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })
+}
 
-const ValidInvites = () => {
-    const [selectedInvite, setSelectedInvite] = useState<inviteType | null>(null);
-    const [invites, setInvites] = useState<inviteType[] | null>(null);
+export default function ValidInvites() {
+  const [selectedInvite, setSelectedInvite] = useState<inviteType | null>(null)
+  const [invites, setInvites] = useState<inviteType[] | null>(null)
 
-    const getValidInvites = async (): Promise<inviteType[]> => {
-        try {
-            const res = await allValid_Invites();
-            if (res.status === 204) {
-                return [];
-            }
-            return res.activeInvites as inviteType[];
-        } catch (e) {
-            alert("Error Occurred");
-            return [];
-        }
-    };
+  const getValidInvites = async (): Promise<inviteType[]> => {
+    try {
+      const res = await allValid_Invites()
+      if (res.status === 204) {
+        return []
+      }
+      return res.activeInvites as inviteType[]
+    } catch (e) {
+      console.error("Error fetching invites:", e)
+      return []
+    }
+  }
 
-    useEffect(() => {
-        const fetchInvites = async () => {
-            const invites = await getValidInvites();
-            setInvites(invites);
-        };
-
-        fetchInvites();
-    }, []);
-
-    function inviteClickHandler(invite: inviteType) {
-        setSelectedInvite(invite);
+  useEffect(() => {
+    const fetchInvites = async () => {
+      const invites = await getValidInvites()
+      setInvites(invites)
     }
 
-    return (
-        <div className="w-full max-w-screen-lg mx-auto relative">
-            {invites && invites.length > 0 ? (
-                <div className="relative">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        {invites.map(invite => (
-                            <div
-                                key={invite.id}
-                                className={`flex flex-col p-6 bg-gray-100 shadow-lg rounded-xl transition-transform transform cursor-pointer
-                                            ${selectedInvite === invite ? "relative z-20 scale-105" : ""}`}
-                                onClick={() => inviteClickHandler(invite)}
-                            >
-                                <span className={`mb-2 ${merriweather.className} `}>
-                                    {formatDate(invite.timeCreated)}
-                                </span>
-                                <h2 className={`text-2xl mb-2 ${pacifico.className}`}>
-                                    {invite.heading}
-                                </h2>
-                                <p className="text-lg mb-2 text-gray-700">
-                                    {invite.pitch.split(" ").slice(0, 8).join(" ") + "..."}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                    {selectedInvite && (
-                        <div className="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm z-10"></div>
-                    )}
-                </div>
-            ) : (
-                <div className={`text-5xl mt-32 text-gray-500 text-center ${poppins.className}`}>
-                    No active invites
-                    <div className={`${pacifico.className} text-lg mt-6`}>Guess no one cooked today</div>
-                </div>
-            )}
-            {selectedInvite && (
-                <InvitePopup
-                    invite={selectedInvite}
-                    onClose={() => setSelectedInvite(null)}
-                />
-            )}
-        </div>
-    );
-};
+    fetchInvites()
+  }, [])
 
-export default ValidInvites;
+  function inviteClickHandler(invite: inviteType) {
+    setSelectedInvite(invite)
+  }
+
+  return (
+    <div className="w-full max-w-screen-xl mx-auto relative">
+      {invites && invites.length > 0 ? (
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {invites.map(invite => (
+            <motion.div
+              key={invite.id}
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div 
+                className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                  selectedInvite === invite ? "ring-2 ring-pink-500" : ""
+                }`}
+                onClick={() => inviteClickHandler(invite)}
+              >
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{invite.heading}</h3>
+                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+                    <Calendar className="w-4 h-4 mr-1" />
+                    {formatDate(invite.timeCreated)}
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    {invite.pitch.split(" ").slice(0, 10).join(" ") + "..."}
+                  </p>
+                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                    <Users className="w-4 h-4 mr-1" />
+                    {invite.slots - invite.emptyslots} / {invite.slots}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      ) : (
+        <div className="text-center mt-16">
+          <h2 className="text-3xl font-bold text-gray-700 dark:text-gray-300 mb-4">No active invites</h2>
+          <p className="text-xl text-gray-500 dark:text-gray-400">Guess no one cooked today</p>
+        </div>
+      )}
+      <AnimatePresence>
+        {selectedInvite && (
+          <InvitePopup
+            invite={selectedInvite}
+            onClose={() => setSelectedInvite(null)}
+          />
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}

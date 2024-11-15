@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Poppins } from 'next/font/google';
 import { User, Users, Instagram, AlertCircle } from 'lucide-react';
@@ -89,8 +88,11 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
   async function fetchGuestList() {
     try {
       const guests = await getGuestList({ inviteId: id });
-      if (guests.status === 200) {
+      if (guests.status === 200 && guests.users!.length > 0) {
         setGuests(guests.users as userType[]);
+      }
+      else if (guests.status === 200 && guests.users!.length === 0) {
+        toast("No guests approved yet");
       }
     } catch (e) {
       toast.error("Error fetching guest list");

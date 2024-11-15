@@ -17,7 +17,7 @@ export default function Home() {
           {"Explore >"}
         </Link>
       </Lamp>
-      <HowBachEatsWorks></HowBachEatsWorks>
+      <HowBachEatsWorks/>
       <Footer />
     </div>
   );

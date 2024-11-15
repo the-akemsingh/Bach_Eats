@@ -22,7 +22,7 @@ export default async function getGuestList({ inviteId }: { inviteId: string }) {
     });
 
     return {
-      users: res.map(item => item.guest), // Only return the `guest` details
+      users: res.map(item => item.guest), 
       status: 200,
     };
   } catch (e) {
