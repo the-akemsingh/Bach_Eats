@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import NavbarProvider from "./NavbarProvider";
-import Logo from "@/components/ui/logo";
 
 
 
@@ -20,7 +19,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          {/* <Logo/> */}
           <NavbarProvider />
           {children}
         </Providers>
