@@ -15,8 +15,8 @@ export default function Signup() {
     const [name, setName] = useState("");
     const [phonenumber, setPhonenumber] = useState("");
     const [gender, setGender] = useState("");
+    const [mailSent, setMailSent] = useState(false);
     const router = useRouter();
-
     const handleSignup = async () => {
         const user = await signup({
             name,
@@ -28,8 +28,11 @@ export default function Signup() {
         if (user.status !== 201) {
             toast.error(user.message);
         } else {
-            toast.success("Signed up successfully");
-            router.push("/signin");
+            toast.success("Signup successful");
+            setMailSent(true);
+            setTimeout(() => {
+                router.push("/signin");
+            }, 3000);
         }
     };
 
@@ -98,7 +101,7 @@ export default function Signup() {
                                     value={phonenumber}
                                     onChange={(e) => setPhonenumber(e.target.value)}
                                     className="w-full bg-gray-700/50 text-white rounded-lg px-4 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-pink-500"
-                                    placeholder="9876543210"
+                                    placeholder="Phone number should contain 10 digits"
                                 />
                                 <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                             </div>
@@ -126,7 +129,7 @@ export default function Signup() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="w-full bg-gray-700/50 text-white rounded-lg px-4 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-pink-500"
-                                    placeholder="••••••••"
+                                    placeholder="Password should contain characters between 8-10"
                                 />
                                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                             </div>
@@ -147,6 +150,11 @@ export default function Signup() {
                         </Link>
                     </p>
                 </motion.div>
+                {mailSent && (
+                    <div className="absolute bottom-4 left-4 bg-green-500 text-white p-2 rounded-lg">
+                        Verification mail sent
+                        </div>
+                        )}
                 <Toaster />
             </div>
         </div>
