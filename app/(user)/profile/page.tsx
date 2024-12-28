@@ -1,7 +1,6 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { Poppins } from 'next/font/google';
 import { useEffect, useState } from "react";
 import UserInvites from "@/app/actions/fetch-userInvites";
 import Image from "next/image";
@@ -11,8 +10,8 @@ import { inviteType } from "@/types";
 import toast, { Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from "framer-motion";
 import { Instagram, Mail, User, Trash2 } from 'lucide-react';
-
-const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600', '700'] });
+import { DMSerifFont, MarkaziFont } from "@/app/fonts";
+import Link from "next/link";
 
 export default function UserProfile() {
   const { data: session } = useSession();
@@ -73,57 +72,73 @@ export default function UserProfile() {
     return `${day}/${month}/${year}`;
   };
 
-  return (
-    <div className={`flex flex-col items-center min-h-screen bg-gradient-to-b from-pink-100 to-white dark:from-gray-900 dark:to-gray-800 pt-24 px-4 ${poppins.className}`}>
-      {/* Tab Navigation */}
-      <div className="mb-8 flex space-x-4">
-        <button
-          className={`text-lg font-semibold p-2 rounded-t-lg transition-colors ${
-            activeTab === "profile"
-              ? "bg-white dark:bg-gray-800 text-pink-600 dark:text-pink-400"
-              : "bg-pink-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-          }`}
-          onClick={() => setActiveTab("profile")}
-        >
-          Profile Info
-        </button>
-        <button
-          className={`text-lg font-semibold p-2 rounded-t-lg transition-colors ${
-            activeTab === "invites"
-              ? "bg-white dark:bg-gray-800 text-pink-600 dark:text-pink-400"
-              : "bg-pink-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-          }`}
-          onClick={() => setActiveTab("invites")}
-        >
-          Posted Invites
-        </button>
-      </div>
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
 
-      <AnimatePresence mode="wait">
-        {activeTab === "profile" && (
-          <motion.div
-            key="profile"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8"
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f5e6e0] via-[#f9dad3] to-[#f5e6e0] p-4">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+        className="w-full max-w-4xl bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 space-y-6"
+      >
+        <h1 className={`${DMSerifFont.className} text-4xl sm:text-5xl text-gray-800 mb-8 text-center`}>
+          Your 
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-rose-600">
+            {" "}Profile
+          </span>
+        </h1>
+
+        {/* Tab Navigation */}
+        <div className="flex justify-center space-x-4 mb-8">
+          <button
+            className={`${MarkaziFont.className} text-xl font-semibold p-2 rounded-full transition-colors ${
+              activeTab === "profile"
+                ? "bg-rose-100 text-rose-600"
+                : "bg-gray-100 text-gray-600 hover:bg-rose-50 hover:text-rose-500"
+            }`}
+            onClick={() => setActiveTab("profile")}
           >
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">Your Profile</h2>
-            <div className="space-y-6">
+            Profile Info
+          </button>
+          <button
+            className={`${MarkaziFont.className} text-xl font-semibold p-2 rounded-full transition-colors ${
+              activeTab === "invites"
+                ? "bg-rose-100 text-rose-600"
+                : "bg-gray-100 text-gray-600 hover:bg-rose-50 hover:text-rose-500"
+            }`}
+            onClick={() => setActiveTab("invites")}
+          >
+            Posted Invites
+          </button>
+        </div>
+
+        <AnimatePresence mode="wait">
+          {activeTab === "profile" && (
+            <motion.div
+              key="profile"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-6"
+            >
               <div className="flex items-center space-x-4">
-                <User className="w-6 h-6 text-pink-600 dark:text-pink-400" />
-                <p className="text-lg text-gray-700 dark:text-gray-300">{userName}</p>
+                <User className="w-6 h-6 text-rose-500" />
+                <p className={`${MarkaziFont.className} text-xl text-gray-700`}>{userName}</p>
               </div>
               <div className="flex items-center space-x-4">
-                <Mail className="w-6 h-6 text-pink-600 dark:text-pink-400" />
-                <p className="text-lg text-gray-700 dark:text-gray-300">{userEmail}</p>
+                <Mail className="w-6 h-6 text-rose-500" />
+                <p className={`${MarkaziFont.className} text-xl text-gray-700`}>{userEmail}</p>
               </div>
               <div className="flex items-center space-x-4">
-                <Instagram className="w-6 h-6 text-pink-600 dark:text-pink-400" />
+                <Instagram className="w-6 h-6 text-rose-500" />
                 {instaUsername ? (
                   <a
-                    className="text-lg text-blue-500 hover:underline"
+                    className={`${MarkaziFont.className} text-xl text-blue-500 hover:underline`}
                     href={`https://www.instagram.com/${instaUsername}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -131,41 +146,38 @@ export default function UserProfile() {
                     @{instaUsername}
                   </a>
                 ) : (
-                  <span className="text-lg text-gray-500 dark:text-gray-400">Not Linked</span>
+                  <span className={`${MarkaziFont.className} text-xl text-gray-500`}>Not Linked</span>
                 )}
               </div>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+          )}
 
-        {activeTab === "invites" && (
-          <motion.div
-            key="invites"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8"
-          >
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">Your Posted Invites</h2>
-            {invites ? (
-              invites.length > 0 ? (
-                <div className="space-y-4">
-                  {invites.map((invite) => (
+          {activeTab === "invites" && (
+            <motion.div
+              key="invites"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-4"
+            >
+              {invites ? (
+                invites.length > 0 ? (
+                  invites.map((invite) => (
                     <motion.div
                       key={invite.id}
-                      className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md bg-gray-50 dark:bg-gray-700 hover:shadow-lg transition-shadow"
+                      className="p-4 border border-rose-200 rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <div onClick={() => Router.push(`/invitations/${invite.id}`)} className="cursor-pointer">
-                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">{invite.heading}</h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <Link href={`/invitations/${invite.id}`}>
+                        <h3 className={`${MarkaziFont.className} text-2xl font-semibold text-gray-800 mb-2`}>{invite.heading}</h3>
+                        <p className={`${MarkaziFont.className} text-lg text-gray-500`}>
                           Posted: {formatDate(invite.timeCreated.toISOString())}
                         </p>
-                      </div>
+                      </Link>
                       <button
-                        className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center space-x-2"
+                        className={`${MarkaziFont.className} mt-4 px-4 py-2 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors flex items-center space-x-2`}
                         onClick={() => {
                           setShowDeleteModal(true);
                           setInviteToDelete(invite.id);
@@ -175,56 +187,57 @@ export default function UserProfile() {
                         <span>Delete Invite</span>
                       </button>
                     </motion.div>
-                  ))}
-                </div>
+                  ))
+                ) : (
+                  <p className={`${MarkaziFont.className} text-xl text-center text-gray-600`}>No Invites Posted</p>
+                )
               ) : (
-                <p className="text-lg text-center text-gray-600 dark:text-gray-400">No Invites Posted</p>
-              )
-            ) : (
-              <p className="text-lg text-center text-gray-600 dark:text-gray-400">Loading invites...</p>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Delete Modal */}
-      <AnimatePresence>
-        {showDeleteModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-          >
-            <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-sm w-full"
-            >
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white text-center mb-4">
-                Are you sure you want to delete this invite?
-              </h2>
-              <div className="flex justify-around">
-                <button
-                  className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
-                  onClick={() => setShowDeleteModal(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-                  onClick={() => inviteToDelete && inviteDeleteHandler(inviteToDelete)}
-                >
-                  Yes, Delete
-                </button>
-              </div>
+                <p className={`${MarkaziFont.className} text-xl text-center text-gray-600`}>Loading invites...</p>
+              )}
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
 
-      <Toaster />
+        {/* Delete Modal */}
+        <AnimatePresence>
+          {showDeleteModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+            >
+              <motion.div
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.9 }}
+                className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full"
+              >
+                <h2 className={`${DMSerifFont.className} text-2xl font-semibold text-gray-800 text-center mb-4`}>
+                  Are you sure you want to delete this invite?
+                </h2>
+                <div className="flex justify-around">
+                  <button
+                    className={`${MarkaziFont.className} px-4 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors`}
+                    onClick={() => setShowDeleteModal(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className={`${MarkaziFont.className} px-4 py-2 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors`}
+                    onClick={() => inviteToDelete && inviteDeleteHandler(inviteToDelete)}
+                  >
+                    Yes, Delete
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <Toaster />
+      </motion.div>
     </div>
   );
 }
+

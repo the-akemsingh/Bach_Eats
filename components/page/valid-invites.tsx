@@ -6,6 +6,7 @@ import { Calendar, Users } from 'lucide-react'
 import { allValid_Invites } from "@/app/actions/getAll-Invites"
 import { inviteType } from "@/types"
 import InvitePopup from "./invite-popup"
+import { DMSerifFont, MarkaziFont } from "@/app/fonts"
 
 const formatDate = (dateString: Date) => {
   const date = new Date(dateString)
@@ -56,23 +57,25 @@ export default function ValidInvites() {
               transition={{ duration: 0.3 }}
             >
               <div 
-                className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg ${
-                  selectedInvite === invite ? "ring-2 ring-pink-500" : ""
+                className={`bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-2xl ${
+                  selectedInvite === invite ? "ring-2 ring-rose-500" : ""
                 }`}
                 onClick={() => inviteClickHandler(invite)}
               >
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{invite.heading}</h3>
-                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    {formatDate(invite.timeCreated)}
+                <div className="p-6">
+                  <h3 className={`${DMSerifFont.className} text-2xl font-semibold text-gray-800 mb-3`}>{invite.heading}</h3>
+                  <div className="flex items-center text-sm text-gray-500 mb-3">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    <span className={`${MarkaziFont.className} text-lg`}>{formatDate(invite.timeCreated)}</span>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  <p className={`${MarkaziFont.className} text-xl text-gray-600 mb-4`}>
                     {invite.pitch.split(" ").slice(0, 10).join(" ") + "..."}
                   </p>
-                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                    <Users className="w-4 h-4 mr-1" />
-                    {invite.slots - invite.emptyslots} / {invite.slots}
+                  <div className="flex items-center text-sm text-gray-500">
+                    <Users className="w-4 h-4 mr-2" />
+                    <span className={`${MarkaziFont.className} text-lg`}>
+                      {invite.slots - invite.emptyslots} / {invite.slots}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -81,8 +84,8 @@ export default function ValidInvites() {
         </motion.div>
       ) : (
         <div className="text-center mt-16">
-          <h2 className="text-3xl font-bold text-gray-700 dark:text-gray-300 mb-4">No active invites</h2>
-          <p className="text-xl text-gray-500 dark:text-gray-400">Guess no one cooked today</p>
+          <h2 className={`${DMSerifFont.className} text-4xl font-bold text-gray-700 mb-4`}>No active invites</h2>
+          <p className={`${MarkaziFont.className} text-2xl text-gray-500`}>Guess no one cooked today</p>
         </div>
       )}
       <AnimatePresence>
@@ -96,3 +99,4 @@ export default function ValidInvites() {
     </div>
   )
 }
+

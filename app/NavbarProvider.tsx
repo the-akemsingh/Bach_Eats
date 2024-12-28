@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 
 const NavbarProvider = () => {
     const pathname = usePathname()
-    const hideNavbar = pathname === '/signin' || pathname === '/signup' || pathname === '/forgot-password';
+    const hideNavbar = pathname === '/signin' || pathname === '/signup' || pathname === '/forgot-password' || pathname === '/';
     return (
         <>
             {!hideNavbar && <Navbar/>}

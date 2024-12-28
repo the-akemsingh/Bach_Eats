@@ -1,35 +1,49 @@
-"use client";
+'use client'
 
-import { signIn } from "next-auth/react";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Mail, Lock } from 'lucide-react';
-import toast, { Toaster } from 'react-hot-toast';
+import { signIn } from "next-auth/react"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import Image from "next/image"
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { Mail, Lock } from 'lucide-react'
+import toast, { Toaster } from 'react-hot-toast'
+import { DMSerifFont, MarkaziFont } from "@/app/fonts"
 
 export default function Signin() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const router = useRouter();
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const router = useRouter()
 
     const handleSignIn = async () => {
         const user = await signIn("credentials", {
             email,
             password,
             redirect: false,
-        });
+        })
         if (user?.error) {
-            toast.error(user.error);
-            return;
+            toast.error(user.error)
+            return
         }
-        toast.success("Signed in successfully");
-        router.push("/");
-    };
+        toast.success("Signed in successfully")
+        router.push("/")
+    }
+
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 }
+    }
+
+    const stagger = {
+        visible: {
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    }
 
     return (
-        <div className="min-h-screen flex">
+        <div className="min-h-screen flex bg-gradient-to-b from-[#f5e6e0] via-[#f9dad3] to-[#f5e6e0]">
             <div className="hidden lg:flex lg:w-1/2 relative">
                 <Image
                     src="/images/redflowercentre.jpg"
@@ -41,30 +55,40 @@ export default function Signin() {
                 />
                 <Link 
                     href='/' 
-                    className="absolute top-4 left-8 text-6xl text-white font-bold z-10"
+                    className={`absolute top-4 left-8 text-6xl font-bold z-10 ${DMSerifFont.className}`}
                 >
-                    BE
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-rose-600">
+                        BE
+                    </span>
                 </Link>
             </div>
 
-            <div className="flex-1 flex justify-center items-center bg-gradient-to-b from-pink-100 to-white dark:from-gray-900 dark:to-gray-800 p-8 lg:p-16">
+            <div className="flex-1 flex justify-center items-center p-8 lg:p-16">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
+                    initial="hidden"
+                    animate="visible"
+                    variants={stagger}
                     className="w-full max-w-md space-y-6"
                 >
-                    <h1 className="text-4xl font-bold text-white mb-8">Sign In</h1>
+                    <motion.h1 
+                        variants={fadeInUp} 
+                        className={`${DMSerifFont.className} text-4xl sm:text-5xl text-gray-800 mb-8`}
+                    >
+                        Welcome to 
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-rose-600">
+                            {" "}BachEats
+                        </span>
+                    </motion.h1>
                     
-                    <div className="space-y-4">
+                    <motion.div variants={fadeInUp} className="space-y-4">
                         <div className="relative">
-                            <label className="text-gray-300 text-sm mb-1 block">Email</label>
+                            <label className="text-gray-600 text-sm mb-1 block">Email</label>
                             <div className="relative">
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-gray-700/50 text-white rounded-lg px-4 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                    className="w-full bg-white/50 text-gray-800 rounded-full px-4 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-rose-400"
                                     placeholder="you@example.com"
                                 />
                                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
@@ -72,36 +96,39 @@ export default function Signin() {
                         </div>
 
                         <div className="relative">
-                            <label className="text-gray-300 text-sm mb-1 block">Password</label>
+                            <label className="text-gray-600 text-sm mb-1 block">Password</label>
                             <div className="relative">
                                 <input
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-gray-700/50 text-white rounded-lg px-4 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                    className="w-full bg-white/50 text-gray-800 rounded-full px-4 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-rose-400"
                                     placeholder="••••••••"
                                 />
                                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                             </div>
                         </div>
 
-                        <button
+                        <motion.button
                             onClick={handleSignIn}
-                            className="w-full bg-pink-600 hover:bg-pink-700 text-white rounded-lg py-3 transition-colors flex items-center justify-center"
+                            className="w-full bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full py-3 transition-all hover:from-rose-500 hover:to-rose-700 flex items-center justify-center"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             Sign In
-                        </button>
-                    </div>
+                        </motion.button>
+                    </motion.div>
 
-                    <p className="text-center text-gray-400">
+                    <motion.p variants={fadeInUp} className="text-center text-gray-600">
                         Don&#39;t have an account?{" "}
-                        <Link href="/signup" className="text-pink-500 hover:text-pink-400">
+                        <Link href="/signup" className="text-rose-500 hover:text-rose-600">
                             Sign Up
                         </Link>
-                    </p>
+                    </motion.p>
                 </motion.div>
                 <Toaster />
             </div>
         </div>
-    );
+    )
 }
+
