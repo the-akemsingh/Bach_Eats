@@ -43,7 +43,7 @@ export default function NewInvite() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f5e6e0] via-[#f9dad3] to-[#f5e6e0] p-4">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f5e6e0] via-[#f9dad3] to-[#f5e6e0] p-4 mt-16 sm:mt-0">
             <motion.div
                 initial="hidden"
                 animate="visible"
