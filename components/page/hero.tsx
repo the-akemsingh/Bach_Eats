@@ -4,11 +4,16 @@ import { DMSerifFont, MarkaziFont } from "@/app/fonts"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import Card from "./Card"
-import { useSession } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import Navbar from "./navbar"
+import toast from "react-hot-toast"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function Hero() {
   const session = useSession().data?.user;
+  const router=useRouter();
+  const [loading,setLoading]=useState<boolean>(false);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -53,6 +58,29 @@ export default function Hero() {
               <Link href="/signin" className="px-6 py-2 bg-white rounded-full text-gray-800 font-medium shadow-sm">
                 Sign In
               </Link>
+              {!loading? <>
+                <button className="mt-3 font-sans pl-2 bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-rose-600" onClick={async () => {
+                setLoading(true)
+                const user=await signIn("credentials", {
+                  email: "singhakem032@gmail.com",
+                  password: "Qwerty@123",
+                  redirect: false,
+                })
+                if (user?.error) {
+                  toast.error(user.error)
+                  setLoading(false)
+                  return
+                }
+                toast.success("Signed in successfully")
+                setLoading(false);
+                router.push("/")
+              }} >
+                Use demo credentials
+              </button>
+              </> : <div className="ml-2">
+              logging in..
+              </div> }
+              
             </div>
           </motion.div>
         )}

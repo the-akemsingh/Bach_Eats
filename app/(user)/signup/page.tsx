@@ -9,6 +9,7 @@ import { User, Mail, Phone, Lock } from 'lucide-react'
 import { signup } from "@/app/actions/Signup"
 import toast, { Toaster } from 'react-hot-toast'
 import { DMSerifFont, MarkaziFont } from "@/app/fonts"
+import PasswordInput from "@/components/ui/passwordInput"
 
 export default function Signup() {
     const [email, setEmail] = useState("")
@@ -146,19 +147,7 @@ export default function Signup() {
                             </select>
                         </div>
 
-                        <div className="relative">
-                            <label className="text-gray-600 text-sm mb-1 block">Password</label>
-                            <div className="relative">
-                                <input
-                                    type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-white/50 text-gray-800 rounded-full px-4 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-rose-400"
-                                    placeholder="8-10 characters"
-                                />
-                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                            </div>
-                        </div>
+                        <PasswordInput onChange={setPassword} placeholder="8-10 characters" type="password" value={password} ></PasswordInput>
 
                         <motion.button
                             onClick={handleSignup}

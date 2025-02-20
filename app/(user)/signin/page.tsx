@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Mail, Lock } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'
-import { DMSerifFont, MarkaziFont } from "@/app/fonts"
+import { DMSerifFont } from "@/app/fonts"
+import PasswordInput from "@/components/ui/passwordInput"
 
 export default function Signin() {
     const [email, setEmail] = useState("")
@@ -95,19 +96,7 @@ export default function Signin() {
                             </div>
                         </div>
 
-                        <div className="relative">
-                            <label className="text-gray-600 text-sm mb-1 block">Password</label>
-                            <div className="relative">
-                                <input
-                                    type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-white/50 text-gray-800 rounded-full px-4 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-rose-400"
-                                    placeholder="••••••••"
-                                />
-                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                            </div>
-                        </div>
+                        <PasswordInput onChange={setPassword} placeholder="••••••••" type="password" value={password} ></PasswordInput>
 
                         <motion.button
                             onClick={handleSignIn}

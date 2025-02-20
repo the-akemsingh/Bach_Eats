@@ -92,6 +92,9 @@ function Navbar() {
                                 <Link href="/signin" className="block md:inline-block px-6 py-2 bg-white rounded-full text-gray-800 font-medium shadow-sm">
                                     Sign In
                                 </Link>
+                                <div className='text-black'>
+                                    asdsa
+                                </div>
                             </>
                         )}
                     </motion.nav>

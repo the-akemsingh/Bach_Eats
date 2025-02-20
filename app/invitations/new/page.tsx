@@ -48,7 +48,7 @@ export default function NewInvite() {
                 initial="hidden"
                 animate="visible"
                 variants={stagger}
-                className="w-full max-w-4xl bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 space-y-6"
+                className="w-full mt-6 max-w-4xl bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 space-y-6"
             >
                 <motion.h1 
                     variants={fadeInUp} 
@@ -91,7 +91,7 @@ export default function NewInvite() {
                         </div>
 
                         <div className="relative">
-                            <label className="text-gray-600 text-sm mb-1 block">Expected Participants</label>
+                            <label className="text-gray-600 text-sm mb-1 block">Expected Guests</label>
                             <div className="relative">
                                 <input
                                     type="number"

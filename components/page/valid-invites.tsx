@@ -85,7 +85,7 @@ export default function ValidInvites() {
       ) : (
         <div className="text-center mt-16">
           <h2 className={`${DMSerifFont.className} text-4xl font-bold text-gray-700 mb-4`}>No active invites</h2>
-          <p className={`${MarkaziFont.className} text-2xl text-gray-500`}>Guess no one cooked today</p>
+          <p className={`${MarkaziFont.className} text-2xl text-gray-500`}>~Guess no one cooked today~</p>
         </div>
       )}
       <AnimatePresence>
