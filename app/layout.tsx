@@ -16,10 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
+    <html lang="en">      
+    <head>
         <style>
-          @import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
+          @import url(&apos;https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap&apos;);
         </style>
       </head>
       <body className="">
