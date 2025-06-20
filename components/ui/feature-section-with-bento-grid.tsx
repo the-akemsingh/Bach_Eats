@@ -15,7 +15,7 @@ function Feature() {
                 How We Bring People Together
               </h2>
               <p className="text-lg max-w-xl lg:max-w-3xl leading-relaxed tracking-tight text-muted-foreground text-gray-600 text-left">
-                Whether you're new in town or just craving good food with good company, BachEats makes it easy to find and join dining experiences nearby. Meet new people, share stories, and make memories — one meal at a time.
+                Whether you are new in town or just craving good food with good company, BachEats makes it easy to find and join dining experiences nearby. Meet new people, share stories, and make memories — one meal at a time.
               </p>
             </div>
           </div>

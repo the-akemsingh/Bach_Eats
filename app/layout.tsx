@@ -7,7 +7,7 @@ import NavbarProvider from "./NavbarProvider";
 
 export const metadata: Metadata = {
   title: "BachEats",
-  description: "Find out bachelor's nearby and share meal with them.",
+  description: "Find out bachelors nearby and share meal with them.",
 };
 
 export default function RootLayout({
