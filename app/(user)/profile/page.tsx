@@ -3,14 +3,12 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import UserInvites from "@/app/actions/fetch-userInvites";
-import Image from "next/image";
 import deleteInvite from "@/app/actions/deleteInvite";
 import { useRouter } from "next/navigation";
 import { inviteType } from "@/types";
 import toast, { Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from "framer-motion";
 import { Instagram, Mail, User, Trash2 } from 'lucide-react';
-import { DMSerifFont, MarkaziFont } from "@/app/fonts";
 import Link from "next/link";
 
 export default function UserProfile() {
@@ -78,16 +76,16 @@ export default function UserProfile() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f5e6e0] via-[#f9dad3] to-[#f5e6e0] p-4">
+    <div className="min-h-screen flex items-center justify-center cal-sans p-4">
       <motion.div
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
         className="w-full max-w-4xl bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 space-y-6"
       >
-        <h1 className={`${DMSerifFont.className} text-4xl sm:text-5xl text-gray-800 mb-8 text-center`}>
+        <h1 className={` text-4xl sm:text-5xl text-gray-800 mb-8 text-center`}>
           Your 
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-rose-600">
+          <span className="bg-clip-text text-transparent bg-rose-600">
             {" "}Profile
           </span>
         </h1>
@@ -95,7 +93,7 @@ export default function UserProfile() {
         {/* Tab Navigation */}
         <div className="flex justify-center space-x-4 mb-8">
           <button
-            className={`${MarkaziFont.className} text-xl font-semibold p-2 rounded-full transition-colors ${
+            className={`text-xl font-semibold p-2 rounded-full transition-colors ${
               activeTab === "profile"
                 ? "bg-rose-100 text-rose-600"
                 : "bg-gray-100 text-gray-600 hover:bg-rose-50 hover:text-rose-500"
@@ -105,7 +103,7 @@ export default function UserProfile() {
             Profile Info
           </button>
           <button
-            className={`${MarkaziFont.className} text-xl font-semibold p-2 rounded-full transition-colors ${
+            className={` text-xl font-semibold p-2 rounded-full transition-colors ${
               activeTab === "invites"
                 ? "bg-rose-100 text-rose-600"
                 : "bg-gray-100 text-gray-600 hover:bg-rose-50 hover:text-rose-500"
@@ -128,17 +126,17 @@ export default function UserProfile() {
             >
               <div className="flex items-center space-x-4">
                 <User className="w-6 h-6 text-rose-500" />
-                <p className={`${MarkaziFont.className} text-xl text-gray-700`}>{userName}</p>
+                <p className={` text-xl text-gray-700`}>{userName}</p>
               </div>
               <div className="flex items-center space-x-4">
                 <Mail className="w-6 h-6 text-rose-500" />
-                <p className={`${MarkaziFont.className} text-xl text-gray-700`}>{userEmail}</p>
+                <p className={` text-xl text-gray-700`}>{userEmail}</p>
               </div>
               <div className="flex items-center space-x-4">
                 <Instagram className="w-6 h-6 text-rose-500" />
                 {instaUsername ? (
                   <a
-                    className={`${MarkaziFont.className} text-xl text-blue-500 hover:underline`}
+                    className={` text-xl text-blue-500 hover:underline`}
                     href={`https://www.instagram.com/${instaUsername}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -146,7 +144,7 @@ export default function UserProfile() {
                     @{instaUsername}
                   </a>
                 ) : (
-                  <span className={`${MarkaziFont.className} text-xl text-gray-500`}>Not Linked</span>
+                  <span className={` text-xl text-gray-500`}>Not Linked</span>
                 )}
               </div>
             </motion.div>
@@ -167,17 +165,16 @@ export default function UserProfile() {
                     <motion.div
                       key={invite.id}
                       className="p-4 border border-rose-200 rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                     
                     >
                       <Link href={`/invitations/${invite.id}`}>
-                        <h3 className={`${MarkaziFont.className} text-2xl font-semibold text-gray-800 mb-2`}>{invite.heading}</h3>
-                        <p className={`${MarkaziFont.className} text-lg text-gray-500`}>
+                        <h3 className={` text-2xl font-semibold text-gray-800 mb-2`}>{invite.heading}</h3>
+                        <p className={` text-lg text-gray-500`}>
                           Posted: {formatDate(invite.timeCreated.toISOString())}
                         </p>
                       </Link>
                       <button
-                        className={`${MarkaziFont.className} mt-4 px-4 py-2 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors flex items-center space-x-2`}
+                        className={` mt-4 px-4 py-2 bg-rose-600 text-white rounded-full transition-colors flex items-center space-x-2`}
                         onClick={() => {
                           setShowDeleteModal(true);
                           setInviteToDelete(invite.id);
@@ -189,10 +186,10 @@ export default function UserProfile() {
                     </motion.div>
                   ))
                 ) : (
-                  <p className={`${MarkaziFont.className} text-xl text-center text-gray-600`}>No Invites Posted</p>
+                  <p className={` text-xl text-center text-gray-600`}>No Invites Posted</p>
                 )
               ) : (
-                <p className={`${MarkaziFont.className} text-xl text-center text-gray-600`}>Loading invites...</p>
+                <p className={` text-xl text-center text-gray-600`}>Loading invites...</p>
               )}
             </motion.div>
           )}
@@ -213,18 +210,18 @@ export default function UserProfile() {
                 exit={{ scale: 0.9 }}
                 className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full"
               >
-                <h2 className={`${DMSerifFont.className} text-2xl font-semibold text-gray-800 text-center mb-4`}>
+                <h2 className={` text-2xl font-semibold text-gray-800 text-center mb-4`}>
                   Are you sure you want to delete this invite?
                 </h2>
                 <div className="flex justify-around">
                   <button
-                    className={`${MarkaziFont.className} px-4 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors`}
+                    className={` px-4 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors`}
                     onClick={() => setShowDeleteModal(false)}
                   >
                     Cancel
                   </button>
                   <button
-                    className={`${MarkaziFont.className} px-4 py-2 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors`}
+                    className={` px-4 py-2 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors`}
                     onClick={() => inviteToDelete && inviteDeleteHandler(inviteToDelete)}
                   >
                     Yes, Delete

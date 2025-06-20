@@ -6,7 +6,6 @@ import { Calendar, Users } from 'lucide-react'
 import { allValid_Invites } from "@/app/actions/getAll-Invites"
 import { inviteType } from "@/types"
 import InvitePopup from "./invite-popup"
-import { DMSerifFont, MarkaziFont } from "@/app/fonts"
 
 const formatDate = (dateString: Date) => {
   const date = new Date(dateString)
@@ -44,7 +43,7 @@ export default function ValidInvites() {
   }
 
   return (
-    <div className="w-full max-w-screen-xl mx-auto relative">
+    <div className="w-full cal-sans max-w-screen-xl mx-auto relative">
       {invites && invites.length > 0 ? (
         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {invites.map(invite => (
@@ -63,17 +62,17 @@ export default function ValidInvites() {
                 onClick={() => inviteClickHandler(invite)}
               >
                 <div className="p-6">
-                  <h3 className={`${DMSerifFont.className} text-2xl font-semibold text-gray-800 mb-3`}>{invite.heading}</h3>
+                  <h3 className={` text-2xl font-semibold text-gray-800 mb-3`}>{invite.heading}</h3>
                   <div className="flex items-center text-sm text-gray-500 mb-3">
                     <Calendar className="w-4 h-4 mr-2" />
-                    <span className={`${MarkaziFont.className} text-lg`}>{formatDate(invite.timeCreated)}</span>
+                    <span className={` text-lg`}>{formatDate(invite.timeCreated)}</span>
                   </div>
-                  <p className={`${MarkaziFont.className} text-xl text-gray-600 mb-4`}>
+                  <p className={` text-xl text-gray-600 mb-4`}>
                     {invite.pitch.split(" ").slice(0, 10).join(" ") + "..."}
                   </p>
                   <div className="flex items-center text-sm text-gray-500">
                     <Users className="w-4 h-4 mr-2" />
-                    <span className={`${MarkaziFont.className} text-lg`}>
+                    <span className={` text-lg`}>
                       {invite.slots - invite.emptyslots} / {invite.slots}
                     </span>
                   </div>
@@ -84,8 +83,8 @@ export default function ValidInvites() {
         </motion.div>
       ) : (
         <div className="text-center mt-16">
-          <h2 className={`${DMSerifFont.className} text-4xl font-bold text-gray-700 mb-4`}>No active invites</h2>
-          <p className={`${MarkaziFont.className} text-2xl text-gray-500`}>~Guess no one cooked today~</p>
+          <h2 className={`text-4xl font-bold text-gray-700 mb-4`}>No active invites</h2>
+          <p className={`text-2xl text-gray-500`}>~Guess no one cooked today~</p>
         </div>
       )}
       <AnimatePresence>

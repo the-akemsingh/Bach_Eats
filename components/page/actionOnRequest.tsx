@@ -7,7 +7,6 @@ import getUserByID from "@/app/actions/getUserbyID"
 import isUserReqAccepted from "@/app/actions/isUserReqAccepted"
 import { inviteWithRequestsType, requesterType } from "@/types"
 import toast, { Toaster } from 'react-hot-toast'
-import { DMSerifFont, MarkaziFont } from "@/app/fonts"
 
 export default function ActionOnRequest({ 
   selectedInvite, 
@@ -96,7 +95,7 @@ export default function ActionOnRequest({
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center">
                         <User className="text-gray-600 mr-2" size={24} />
-                        <span className={`${MarkaziFont.className} text-2xl text-gray-800`}>
+                        <span className={` text-2xl text-gray-800`}>
                           {requester.name}
                         </span>
                       </div>
@@ -106,40 +105,36 @@ export default function ActionOnRequest({
                           href={`https://www.instagram.com/${requester.instagramUsername}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`${MarkaziFont.className} text-xl text-blue-500 hover:underline`}
+                          className={` text-xl text-blue-500 hover:underline`}
                         >
                           @{requester.instagramUsername || "N/A"}
                         </a>
                       </div>
                     </div>
                     
-                    <div className={`${MarkaziFont.className} text-xl text-gray-600 mb-4`}>
+                    <div className={` text-xl text-gray-600 mb-4`}>
                       Gender: {requester.gender}
                     </div>
                     
                     {!requester.isAccepted ? (
                       <div className="flex gap-4">
                         <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
                           onClick={() => acceptInvite(requester.id, selectedInvite)}
-                          className={`${MarkaziFont.className} text-xl px-6 py-2 bg-gradient-to-r from-emerald-400 to-emerald-600 text-white rounded-full flex items-center justify-center transition-colors`}
+                          className={` text-xl px-6 py-2 bg-emerald-600 text-white rounded-full flex items-center justify-center transition-colors`}
                         >
                           <Check className="w-5 h-5 mr-2" />
                           Accept Request
                         </motion.button>
                         <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
                           onClick={() => deleteInviteRequest(requester.id, selectedInvite)}
-                          className={`${MarkaziFont.className} text-xl px-6 py-2 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full flex items-center justify-center transition-colors`}
+                          className={` text-lg px-6 py-2 bg-rose-600 text-white rounded-full flex items-center justify-center transition-colors`}
                         >
                           <X className="w-5 h-5 mr-2" />
                           Delete Request
                         </motion.button>
                       </div>
                     ) : (
-                      <div className={`${MarkaziFont.className} text-2xl text-emerald-500 font-medium`}>
+                      <div className={` text-2xl text-emerald-500 font-medium`}>
                         Request Accepted
                       </div>
                     )}

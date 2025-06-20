@@ -9,8 +9,8 @@ export function ActivitiesCard() {
     ));
 
     return (
-        <div className="w-full h-full py-20">
-            <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800  font-sans">
+        <div className="w-full h-full px-6 sm:px-10 py-20">
+            <h2 className=" container cal-sans mx-auto text-3xl md:text-5xl font-bold  font-sans" style={{letterSpacing: "0.01rem"}} >
                 Things you can do here.
             </h2>
             <Carousel items={cards} />
@@ -31,13 +31,6 @@ const Pitch1 = () => {
                     </span>{" "}
                     Find people nearby who are also looking to share a homemade meal. Whether you join someone for dinner or invite others to your place, it&#39;s a simple way to skip the hassle of cooking alone and enjoy a cozy, shared experience. Connect with like-minded individuals, taste different homemade dishes, and make new friends along the way. Just pick an invite, show up, and enjoy a good meal with great company— no pots and pans required!
                 </p>
-                {/* <Image
-                    src=""
-                    alt=""
-                    height="500"
-                    width="500"
-                    className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
-                /> */}
             </div>
         </>
     );
@@ -55,13 +48,6 @@ const Pitch2 = () => {
                     </span>{" "}
                     Extend an invitation and turn it into an opportunity to meet new people! Whether it&#39;s leftovers or a dish you made too much of, inviting others to share a meal is a simple way to connect. You&#39;ll not only clear some space in the fridge but also build new friendships in the process. It&#39;s about more than just food; it&#39;s a way to bring people together, share stories, and enjoy a relaxed, homey atmosphere. So, why eat alone when you can create lasting connections over supper?
                 </p>
-                {/* <Image
-                    src=""
-                    alt=""
-                    height="500"
-                    width="500"
-                    className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
-                /> */}
             </div>
         </>
     );
@@ -79,13 +65,6 @@ const Pitch3 = () => {
                     </span>{" "}
                     Why not share it with others and make it a memorable experience? Invite people over to taste your culinary creation and enjoy the satisfaction of bringing your dish to life for an appreciative crowd. Whether it&#39;s a family secret or something you&#39;ve perfected over time, sharing food is a great way to connect with others. You&#39;ll not only get to showcase your cooking skills but also bond over the joy of a good meal. Who knows? You might even inspire someone to try something new in their own kitchen!
                 </p>
-                {/* <Image
-                    src=""
-                    alt=""
-                    height="500"
-                    width="500"
-                    className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
-                /> */}
             </div>
         </>
     );
@@ -103,13 +82,6 @@ const Pitch4 = () => {
                     </span>{" "}
                     Find a coding partner and take your development game to the next level! Working alongside someone else can help you stay motivated, exchange ideas, and solve problems faster. Whether you&#39;re tackling bugs, brainstorming solutions, or just need accountability, teaming up with a fellow coder creates a productive and fun environment. It&#39;s also a great way to share knowledge, learn new techniques, and improve your skills. Don&#39;t code alone—find a partner and elevate your workflow through collaboration!
                 </p>
-                {/* <Image
-                    src=""
-                    alt=""
-                    height="500"
-                    width="500"
-                    className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
-                /> */}
             </div>
         </>
     );
@@ -127,13 +99,6 @@ const Pitch5 = () => {
                     </span>{" "}
                     You&#39;ve just made new friends, so why not keep the connection going? Invite them over next time and return the favor. Sharing a meal is more than just food—it&#39;s about creating lasting bonds and showing appreciation for the company. Whether it&#39;s hosting them for dinner or joining in on another activity, inviting them back builds stronger connections. It&#39;s an easy way to turn a simple meal into a meaningful friendship, making both your day and theirs a little brighter.
                 </p>
-                {/* <Image
-                    src=""
-                    alt=""
-                    height="500"
-                    width="500"
-                    className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
-                /> */}
             </div>
         </>
     );

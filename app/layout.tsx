@@ -17,7 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <head>
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
+        </style>
+      </head>
+      <body className="">
         <Providers>
           <NavbarProvider />
           {children}

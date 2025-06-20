@@ -43,23 +43,23 @@ export default function NewInvite() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f5e6e0] via-[#f9dad3] to-[#f5e6e0] p-4 mt-16 sm:mt-0">
+        <div className="min-h-screen cal-sans flex items-center justify-center p-4 mt-16 sm:mt-0">
             <motion.div
                 initial="hidden"
                 animate="visible"
                 variants={stagger}
                 className="w-full mt-6 max-w-4xl bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 space-y-6"
             >
-                <motion.h1 
-                    variants={fadeInUp} 
-                    className={`${DMSerifFont.className} text-4xl sm:text-5xl text-gray-800 mb-8 text-center`}
+                <motion.h1
+                    variants={fadeInUp}
+                    className={` text-4xl sm:text-5xl text-gray-800 mb-8 text-center`}
                 >
-                    Create a 
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-rose-600">
+                    Create a
+                    <span className=" text-rose-600">
                         {" "}Proposal
                     </span>
                 </motion.h1>
-                
+
                 <motion.div variants={fadeInUp} className="flex flex-col md:flex-row gap-8">
                     <div className="flex-1 space-y-4">
                         <div className="relative">
@@ -124,9 +124,7 @@ export default function NewInvite() {
 
                 <motion.button
                     onClick={handleCreateInvite}
-                    className="w-36 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full py-3 transition-all hover:from-rose-500 hover:to-rose-700 flex items-center justify-center"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="w-36 rounded-full py-3 transition-all bg-rose-600 text-white flex items-center justify-center"
                 >
                     Create Invite
                 </motion.button>

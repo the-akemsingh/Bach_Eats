@@ -111,31 +111,31 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
 
   if (!invite) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f5e6e0] via-[#f9dad3] to-[#f5e6e0]">
-        <h1 className={`${DMSerifFont.className} text-4xl text-rose-600`}>Invite not found</h1>
+      <div className="min-h-screen flex items-center justify-center cal-sans">
+        <h1 className={` text-4xl text-rose-600`}>Invite not found</h1>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen  flex flex-col items-center bg-gradient-to-b from-[#f5e6e0] via-[#f9dad3] to-[#f5e6e0] pt-24 px-4">
+    <div className="min-h-screen flex flex-col items-center cal-sans pt-24 px-4">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="w-full max-h-fit max-w-2xl mx-auto bg-gray-900 shadow-xl rounded-3xl p-10"
       >
-        <h1 className={`${DMSerifFont.className} text-5xl text-white mb-6`}>{invite.heading}</h1>
-        <p className={`${MarkaziFont.className} text-2xl text-gray-300 mb-8`}>{invite.pitch}</p>
+        <h1 className={` text-5xl text-white mb-6`}>{invite.heading}</h1>
+        <p className={` text-2xl text-gray-300 mb-8`}>{invite.pitch}</p>
         <div className="flex items-center gap-4 mb-8">
           <div className="w-12 h-12 rounded-full bg-gradient-to-r from-rose-400 to-rose-500 flex items-center justify-center">
             <span className="text-white text-xl font-medium">{invite.slots}</span>
           </div>
-          <p className={`${MarkaziFont.className} text-2xl text-gray-300`}>Slots Available</p>
+          <p className={` text-2xl text-gray-300`}>Slots Available</p>
         </div>
         {invite.note && (
           <div className="mt-8 bg-gray-800 p-6 rounded-xl">
-            <p className={`${MarkaziFont.className} text-xl text-gray-300`}>
+            <p className={` text-xl text-gray-300`}>
               <AlertCircle className="inline-block mr-2" size={24} />
               Note: {invite.note}
             </p>
@@ -153,7 +153,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
           <div className="flex items-center mb-6">
             <Instagram className="text-rose-600 mr-2" size={24} />
             <a
-              className={`${MarkaziFont.className} text-2xl text-blue-500 hover:underline`}
+              className={` text-2xl text-blue-500 hover:underline`}
               href={`https://www.instagram.com/${host.instagramUsername}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -165,13 +165,13 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
         <div className="flex justify-between">
           <div className="flex items-center">
             <Users className="text-gray-600 mr-2" size={24} />
-            <span className={`${MarkaziFont.className} text-2xl text-gray-600`}>
+            <span className={` text-2xl text-gray-600`}>
               Total Slots: {invite.slots}
             </span>
           </div>
           <div className="flex items-center">
             <User className="text-gray-600 mr-2" size={24} />
-            <span className={`${MarkaziFont.className} text-2xl text-gray-600`}>
+            <span className={` text-2xl text-gray-600`}>
               Empty Slots: {invite.emptyslots}
             </span>
           </div>
@@ -188,7 +188,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
           <div className="flex flex-col items-center">
             {isUserAccepted ? (
               <div className="text-center">
-                <span className={`${MarkaziFont.className} text-3xl text-green-500 mb-6 block`}>Request Accepted</span>
+                <span className={` text-3xl text-green-500 mb-6 block`}>Request Accepted</span>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -196,7 +196,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
                     confirm("Are you sure you want to cancel your request?") &&
                     DeleteThisGuestHandler({ inviteId: invite.id, guestId: userId! })
                   }
-                  className={`${MarkaziFont.className} text-2xl px-8 py-3 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors`}
+                  className={` text-2xl px-8 py-3 bg-rose-600 text-white rounded-full transition-colors`}
                 >
                   Cancel Request
                 </motion.button>
@@ -205,15 +205,13 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
               <div className="text-center">
                 {invite.slots >= invite.emptyslots && invite.emptyslots > 0 ? (
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                     onClick={sendReqHandler}
-                    className={`${MarkaziFont.className} text-2xl px-8 py-3 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors`}
+                    className={` text-2xl px-8 py-3 bg-rose-600 text-white rounded-full transition-colors`}
                   >
                     {!requestSent ? "Send Request" : "Request Sent"}
                   </motion.button>
                 ) : (
-                  <span className={`${MarkaziFont.className} text-3xl text-red-500`}>No Slots Available</span>
+                  <span className={` text-3xl text-red-500`}>No Slots Available</span>
                 )}
               </div>
             )}
@@ -221,10 +219,8 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
         ) : (
           <div className="text-center">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={fetchGuestList}
-              className={`${MarkaziFont.className} text-2xl px-8 py-3 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors`}
+              className={` text-2xl px-8 py-3 bg-rose-600 text-white rounded-full transition-colors`}
             >
               View Approved Guest List
             </motion.button>
@@ -242,19 +238,19 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
             className="w-full max-w-4xl mx-auto mt-8 bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden"
           >
             <div className="p-8">
-              <h2 className={`${DMSerifFont.className} text-4xl text-gray-800 mb-8`}>Approved Guest List</h2>
+              <h2 className={`text-4xl text-gray-800 mb-8`}>Approved Guest List</h2>
               <div className="space-y-6">
                 {guests.map((guest) => (
                   <div key={guest.id} className="flex items-center justify-between border-b border-gray-200 pb-6">
                     <div>
                       <div className="flex items-center mb-2">
                         <User className="text-gray-600 mr-2" size={20} />
-                        <span className={`${MarkaziFont.className} text-2xl text-gray-800`}>{guest.name}</span>
+                        <span className={` text-2xl text-gray-800`}>{guest.name}</span>
                       </div>
                       <div className="flex items-center">
                         <Instagram className="text-rose-600 mr-2" size={20} />
                         <a
-                          className={`${MarkaziFont.className} text-xl text-blue-500 hover:underline`}
+                          className={` text-xl text-blue-500 hover:underline`}
                           href={`https://www.instagram.com/${guest.instagramUsername}`}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -270,7 +266,7 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
                         confirm("Are you sure you want to delete this guest?") &&
                         DeleteThisGuestHandler({ inviteId: invite.id, guestId: guest.id! })
                       }
-                      className={`${MarkaziFont.className} text-xl px-6 py-2 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors`}
+                      className={` text-xl px-6 py-2 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors`}
                     >
                       Delete Guest
                     </motion.button>
@@ -296,14 +292,12 @@ export default function InviteDetails({ params }: InviteDetailsProps) {
               exit={{ scale: 0.9 }}
               className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full"
             >
-              <h2 className={`${DMSerifFont.className} text-3xl font-bold text-gray-800 mb-4`}>Request Sent</h2>
-              <p className={`${MarkaziFont.className} text-xl text-gray-600 mb-2`}>Your social account will be visible to the host now.</p>
-              <p className={`${MarkaziFont.className} text-xl text-gray-600 mb-6`}>You will be notified when the request is accepted.</p>
+              <h2 className={` text-3xl font-bold text-gray-800 mb-4`}>Request Sent</h2>
+              <p className={` text-xl text-gray-600 mb-2`}>Your social account will be visible to the host now.</p>
+              <p className={` text-xl text-gray-600 mb-6`}>You will be notified when the request is accepted.</p>
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 onClick={() => setShowPopup(false)}
-                className={`${MarkaziFont.className} text-2xl px-8 py-3 bg-gradient-to-r from-rose-400 to-rose-600 text-white rounded-full hover:from-rose-500 hover:to-rose-700 transition-colors`}
+                className={` text-2xl px-8 py-3 bg-rose-600 text-white rounded-full transition-colors`}
               >
                 Close
               </motion.button>
