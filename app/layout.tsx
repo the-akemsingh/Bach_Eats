@@ -4,6 +4,7 @@ import { Providers } from "./providers";
 import NavbarProvider from "./NavbarProvider";
 import Footer from "@/components/page/footer";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next"
 
 
 
@@ -28,7 +29,8 @@ export default function RootLayout({
       <body className="">
         <Providers>
           <NavbarProvider />
-          {children}
+          {children}          
+          <Analytics />
           <Footer />
         </Providers>
       </body>
