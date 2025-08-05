@@ -43,7 +43,7 @@ export default function NewInvite() {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 pt-20 bg-white cal-sans font-normal justify-center p-6">
             <div className="justify-center col-span-1 hidden md:block">
-                <img src="/images/newInvitePageImage.svg" className="ml-5 fixed" height={500} width={600} alt="" />
+                <img src="/images/newInvitePageImage.svg" className="ml-5 " height={500} width={600} alt="" />
             </div>
 
             <motion.div
@@ -81,6 +81,7 @@ export default function NewInvite() {
                             <label className="text-black text-lg font-normal block">Expected Guests</label>
                             <input
                                 type="number"
+                                min={1}
                                 className="w-full bg-transparent border-b-2 border-gray-200 focus:border-yellow-600 text-black text-lg py-3 px-0 focus:outline-none transition-colors"
                                 placeholder="How many people do you expect?"
                                 {...register("slots", { required: { value: true, message: "Number of slots is required" }, min: { value: 1, message: "At least one slot is required" } })}

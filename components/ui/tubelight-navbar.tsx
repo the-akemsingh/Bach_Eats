@@ -5,7 +5,6 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { usePathname } from "next/navigation"
 
 interface NavItem {
   name: string
@@ -18,10 +17,11 @@ interface NavBarProps {
   className?: string
   activeTab: string
   onTabChange?: (tabName: string) => void
+  isHeroSectionVisible?: boolean
 }
 
 
-export function NavBar({ items, className, activeTab, onTabChange }: NavBarProps) {
+export function NavBar({ items, className, activeTab, onTabChange, isHeroSectionVisible }: NavBarProps) {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export function NavBar({ items, className, activeTab, onTabChange }: NavBarProps
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  if(items.length === 0) return null;
+  if (items.length === 0) return null;
   return (
     <div
       className={cn(
@@ -42,7 +42,7 @@ export function NavBar({ items, className, activeTab, onTabChange }: NavBarProps
         className,
       )}
     >
-      <div className="flex cal-sans items-center gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
+      <div className="flex cal-sans  items-center gap-3 bg-background/5 py-1 px-1 rounded-full shadow-lg">
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
@@ -53,14 +53,14 @@ export function NavBar({ items, className, activeTab, onTabChange }: NavBarProps
               href={item.url}
               onClick={() => onTabChange && onTabChange(item.name)}
               className={cn(
-                "relative cursor-pointer text-sm  px-6 py-2 rounded-full transition-colors",
-                "text-foreground/80 hover:text-primary",
-                isActive && "bg-muted text-primary",
+                "relative cursor-pointer text-sm px-6 py-2 rounded-full transition-colors",
+                isActive ? "bg-muted text-primary" : isHeroSectionVisible ? "hover:text-primary/90" : "hover:text-primary",
+                isActive && "bg-muted"
               )}
             >
-              <span className="hidden md:inline text-lg" style={{ letterSpacing: "0.05em" }} >{item.name}</span>
+              <span className={`hidden md:inline text-lg transition-colors duration-300 ${isHeroSectionVisible ? 'text-white' : 'text-black'}`} style={{ letterSpacing: "0.05em" }}>{item.name}</span>
               <span className="md:hidden">
-                <Icon size={18} strokeWidth={2.5} />
+                <Icon size={18} strokeWidth={2.5} className={isHeroSectionVisible ? 'text-white' : 'text-black'} />
               </span>
               {isActive && (
                 <motion.div

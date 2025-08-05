@@ -5,9 +5,7 @@ import { Github } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="cal-sans border-t bg-black text-white" style={{
-      borderRadius: '4rem 4rem 0 0',
-    }}>
+    <footer className="cal-sans footer-rounded border-t bg-black text-white">
       <div className="max-w-6xl mx-auto  px-4 py-36">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-center sm:text-left">

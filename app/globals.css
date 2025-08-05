@@ -14,6 +14,19 @@
   font-style: normal;
 }
 
+/* in your globals.css or tailwind.css */
+.footer-rounded {
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+
+@media (min-width: 768px) {
+  .footer-rounded {
+    border-top-left-radius: 4rem;
+    border-top-right-radius: 4rem;
+  }
+}
+
 
 /* Animation for continuous text marquee effect */
 @keyframes marquee {

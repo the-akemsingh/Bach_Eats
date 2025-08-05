@@ -23,70 +23,37 @@ export default function Hero() {
 
   return (
     <div className="relative pb-10 overflow-hidden">
+      {/* Background Video */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover "
+          src="/Cozy_Apartment_Night_View_Video.mp4"
+        />
+        {/* <div className="absolute inset-0 bg-white/50 backdrop-blur-sm"></div> */}
+      </div>
+      
       <motion.div
         initial="hidden"
         animate="visible"
         variants={stagger}
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8"
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 z-10"
       >
 
-        {/* Navigation
-        {session ? (
-          <div className="mb-10">
-            <Navbar></Navbar>
-          </div>
-        ) : (
-          <motion.div
-            variants={fadeInUp}
-            className="flex flex-col relative bottom-14 sm:flex-row justify-end items-center mb-12 space-y-4 sm:space-y-0"
-          >
-            <div className="space-x-4">
-              <Link href="/signup" className="px-6 py-2 bg-white rounded-full text-gray-800 font-medium shadow-sm">
-                Sign up
-              </Link>
-              <Link href="/signin" className="px-6 py-2 bg-white rounded-full text-gray-800 font-medium shadow-sm">
-                Sign In
-              </Link>
-              {!loading ? <>
-                <button className="mt-3 font-sans pl-2 bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-rose-600" onClick={async () => {
-                  setLoading(true)
-                  const user = await signIn("credentials", {
-                    email: "singhakem032@gmail.com",
-                    password: "Qwerty@123",
-                    redirect: false,
-                  })
-                  if (user?.error) {
-                    toast.error(user.error)
-                    setLoading(false)
-                    return
-                  }
-                  toast.success("Signed in successfully")
-                  setLoading(false);
-                  router.push("/")
-                }} >
-                  Use demo credentials
-                </button>
-              </> : <div className="ml-2">
-                logging in..
-              </div>}
-
-            </div>
-          </motion.div>
-        )} */}
 
         {/* Main Content */}
-        <div className="flex flex-col mt-10 items-center text-center">
+        <div className="flex flex-col mt-20 items-center text-center">
           <motion.h1
             variants={fadeInUp}
-            className={`cal-sans text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-gray-800 leading-tight mt-4 `}
+            className={`cal-sans text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white leading-tight mt-4 `}
 
           >
             Join people nearby
             <br />
             for a  <span className="text-yellow-600 ms-madi-regular  relative" 
-            // style={{
-            //   textShadow: '6px 6px 2px rgba(0, 0, 0, 0.2)',
-            // }}
             >
                shared dining experience
               <div
@@ -130,7 +97,7 @@ export default function Hero() {
           </motion.div>
 
           <p
-            className={`text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed cal-sans`}
+            className={`text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed cal-sans`}
           >
             Connect with fellow bachelors in your area. Share homemade meals, discover new flavors, and build lasting
             friendships over food.
@@ -139,7 +106,7 @@ export default function Hero() {
           <div className="mt-5">
             <Link 
               href={!session ? `/signin` : `/invitations/all`} 
-              className="text-slide-container bg-gray-800 text-white transition-colors duration-300 border hover:bg-rose-600 
+              className="text-slide-container bg-gray-800 text-white transition-colors duration-300  hover:bg-rose-600 
                 rounded-full block
                 w-full sm:w-auto px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-4
                 max-w-[150px] sm:max-w-[200px] md:max-w-[250px]"

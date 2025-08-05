@@ -15,12 +15,33 @@ function Navbar() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('');
     const pathname = usePathname();
+    const [isHeroSectionVisible, setIsHeroSectionVisible] = useState(true);
 
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
-    // Close dropdown when clicking outside
     useEffect(() => {
-        const handleClickOutside = (event:any) => {
+        if (pathname !== '/') {
+            setIsHeroSectionVisible(false);
+            return;
+        }
+
+        const checkHeroSection = () => {
+            const heroSection = document.getElementById('hero-section');
+            if (heroSection) {
+                const rect = heroSection.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight / 2 && rect.bottom >= 0;
+                setIsHeroSectionVisible(isVisible);
+            } else {
+                setIsHeroSectionVisible(false);
+            }
+        };
+        checkHeroSection();
+        window.addEventListener('scroll', checkHeroSection);
+        return () => window.removeEventListener('scroll', checkHeroSection);
+    }, [pathname]);
+
+    useEffect(() => {
+        const handleClickOutside = (event: any) => {
             if (isDropdownOpen && !event.target.closest('.user-dropdown')) {
                 setIsDropdownOpen(false);
             }
@@ -31,7 +52,6 @@ function Navbar() {
     }, [isDropdownOpen]);
 
     useEffect(() => {
-        // Define all possible navigation items including home
         const allNavItems = [
             { name: 'Home', url: '/' },
             { name: 'Create Invite', url: '/invitations/new' },
@@ -39,13 +59,10 @@ function Navbar() {
             { name: 'Requests', url: '/invitations/reqreceived' }
         ];
 
-        // Find the matching nav item based on the current pathname
         const matchingItem = allNavItems.find(item => {
             if (item.url === '/') {
-                // For home page, exact match only
                 return pathname === '/';
             } else {
-                // For other pages, check if pathname includes the URL
                 return pathname.includes(item.url);
             }
         });
@@ -77,21 +94,23 @@ function Navbar() {
                 variants={stagger}
                 className="container mx-auto"
             >
-                <div className="flex items-center justify-between py-4">
+                <div className="flex items-center justify-between ">
                     <h1 className={`fixed top-6 cal-sans text-4xl sm:text-5xl z-50`}>
-                        <Link 
+                        <Link
                             href="/"
                             onClick={() => setActiveTab('Home')}
+                            className={`transition-colors duration-300 ${isHeroSectionVisible ? 'text-white' : 'text-black'}`}
                         >
                             BachEats.
                         </Link>
                     </h1>
-                    <NavBar 
-                        items={navItems} 
+                    <NavBar
+                        isHeroSectionVisible={isHeroSectionVisible}
+                        items={navItems}
                         activeTab={activeTab}
                         onTabChange={setActiveTab}
                     />
-                    
+
                     {/* User dropdown menu */}
                     {session?.data?.user && (
                         <div className="fixed cal-sans top-6 right-6 z-50 user-dropdown">
@@ -102,7 +121,7 @@ function Navbar() {
                                 <User className="w-6 h-6" />
                                 <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                             </button>
-                            
+
                             {/* Dropdown menu */}
                             {isDropdownOpen && (
                                 <motion.div
@@ -111,17 +130,17 @@ function Navbar() {
                                     exit={{ opacity: 0, y: -10 }}
                                     className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 py-1"
                                 >                                    <Link
-                                        href="/profile"
-                                        className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-rose-50  hover:text-rose-600 transition-colors duration-200"
-                                        onClick={() => setIsDropdownOpen(false)}
-                                    >
+                                    href="/profile"
+                                    className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-rose-50  hover:text-rose-600 transition-colors duration-200"
+                                    onClick={() => setIsDropdownOpen(false)}
+                                >
                                         <User className="w-6 h-6" />
                                         <span>Profile</span>
                                     </Link>
-                                      <AcceptedInvitesNotification />
-                                    
+                                    <AcceptedInvitesNotification />
+
                                     <div className="border-t border-gray-100 my-1"></div>
-                                    
+
                                     <button
                                         onClick={() => {
                                             setIsDropdownOpen(false);

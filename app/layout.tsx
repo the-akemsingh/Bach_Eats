@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import NavbarProvider from "./NavbarProvider";
+import Footer from "@/components/page/footer";
 
 
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         <Providers>
           <NavbarProvider />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
