@@ -5,8 +5,6 @@ import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Users, Instagram, AlertCircle } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
-import { DMSerifFont, MarkaziFont } from "@/app/fonts";
-
 import getInvitebyId from "@/app/actions/getInviteByID";
 import getUserByID from "@/app/actions/getUserbyID";
 import sendInviteReq from "@/app/actions/sendInviteReq";

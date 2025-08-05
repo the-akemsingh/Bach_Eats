@@ -93,7 +93,7 @@ export default function UserProfile() {
         {/* Tab Navigation */}
         <div className="flex justify-center space-x-4 mb-8">
           <button
-            className={`text-xl font-semibold p-2 rounded-full transition-colors ${
+            className={`text-xl  p-2 rounded-full transition-colors ${
               activeTab === "profile"
                 ? "bg-rose-100 text-rose-600"
                 : "bg-gray-100 text-gray-600 hover:bg-rose-50 hover:text-rose-500"
@@ -103,7 +103,7 @@ export default function UserProfile() {
             Profile Info
           </button>
           <button
-            className={` text-xl font-semibold p-2 rounded-full transition-colors ${
+            className={` text-xl p-2 rounded-full transition-colors ${
               activeTab === "invites"
                 ? "bg-rose-100 text-rose-600"
                 : "bg-gray-100 text-gray-600 hover:bg-rose-50 hover:text-rose-500"

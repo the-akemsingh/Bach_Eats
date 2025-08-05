@@ -20,6 +20,7 @@ export default function RootLayout({
     <head>
         <style>
           @import url(&apos;https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap&apos;);
+          @import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
         </style>
       </head>
       <body className="">

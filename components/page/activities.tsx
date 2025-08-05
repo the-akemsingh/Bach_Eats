@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React from "react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 
@@ -9,8 +8,8 @@ export function ActivitiesCard() {
     ));
 
     return (
-        <div className="w-full h-full px-6 sm:px-10 py-20">
-            <h2 className=" container cal-sans mx-auto text-3xl md:text-5xl font-bold  font-sans" style={{letterSpacing: "0.01rem"}} >
+        <div className="w-full h-full px-6 sm:px-10 py-5">
+            <h2 className=" container cal-sans mx-auto text-3xl md:text-5xl font-bold  font-sans" style={{ letterSpacing: "0.01rem" }} >
                 Things you can do here.
             </h2>
             <Carousel items={cards} />

@@ -1,4 +1,3 @@
-import { DMSerifFont, MarkaziFont } from "@/app/fonts"
 import ValidInvites from "@/components/page/valid-invites"
 
 export default function AllInvites() {

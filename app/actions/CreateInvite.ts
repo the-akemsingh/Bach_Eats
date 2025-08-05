@@ -22,6 +22,7 @@ export async function CreateNewInvite({
   if (!isValid.success) {
     console.log(isValid.error);
     return {
+      status: 400,
       message: "One or more input is invalid",
     };
   }
@@ -40,8 +41,8 @@ export async function CreateNewInvite({
         pitch,
         hostId,
         note,
-        slots,
-        emptyslots:slots,
+        slots:Number(slots),
+        emptyslots:Number(slots),
       },
     });
     return {

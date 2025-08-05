@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 import { User, Mail, Phone, Lock, Check, ArrowRight } from 'lucide-react'
 import { signup } from "@/app/actions/Signup"
 import toast, { Toaster } from 'react-hot-toast'
-import { DMSerifFont, MarkaziFont } from "@/app/fonts"
+import { DMSerifFont } from "@/app/fonts"
 import PasswordInput from "@/components/ui/passwordInput"
 
 export default function Signup() {

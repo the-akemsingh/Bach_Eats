@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 
 function Feature() {
   return (
@@ -7,7 +6,6 @@ function Feature() {
         <div className="flex flex-col gap-10">
           <div className="flex gap-4 flex-col items-start">
             <div>
-              {/* <Badge className="text-lg text-yellow-500" >Discover meaningful connections. ✨</Badge> */}
             </div>
             <div className="flex gap-2 flex-col">
               <h2 className="text-3xl md:text-5xl text-wrap tracking-tighter max-w-xl font-regular text-left"
