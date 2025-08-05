@@ -3,6 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import NavbarProvider from "./NavbarProvider";
 import Footer from "@/components/page/footer";
+import Script from "next/script";
 
 
 
@@ -31,6 +32,7 @@ export default function RootLayout({
           <Footer />
         </Providers>
       </body>
+       <Script src="https://scripts.simpleanalyticscdn.com/latest.js"  />
     </html>
   );
 }
