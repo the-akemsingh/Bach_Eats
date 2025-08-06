@@ -18,7 +18,7 @@ export default function Footer() {
             </span>
           </p>
           <div className="flex items-center mt-4 sm:mt-0">
-            <Link
+            {/* <Link
               href="https://github.com/the-akemsingh/Bach_Eats"
               target="_blank"
               rel="noopener noreferrer"
@@ -26,7 +26,7 @@ export default function Footer() {
               aria-label="Bach Eats GitHub Repository"
             >
               <Github size={24} />
-            </Link>
+            </Link> */}
             <p className="ml-4 text-lg">
               &copy; {new Date().getFullYear()} BachEats. All rights reserved.
             </p>
